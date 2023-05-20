@@ -1,0 +1,44 @@
+<div class="header">
+  <div class="container">
+    <div class="header-wrapper">
+      <div class="icon-logo">
+        <a [routerLink]="['/']"
+          ><img src="../../../assets/images/logo.png" alt="logo"
+        /></a>
+      </div>
+      <h2 style="color: aliceblue;">Administrator Panel</h2>
+      <nav class="center-menu">
+        <ul>
+          <li>
+            <a
+              routerLinkActive="active"
+              [routerLink]="['/admin', 'dashboard']"
+              [routerLinkActiveOptions]="{ exact: true }"
+              >Dashboard</a
+            >
+          </li>
+          <li>
+            <a routerLinkActive="active" [routerLink]="['/admin', 'add']"
+              >Add product</a
+            >
+          </li>
+          <li>
+            <a routerLinkActive="active" [routerLink]="['/admin', 'orders']"
+              >Orders</a
+            >
+          </li>
+          <li>
+            <a href="#" (click)="logout($event)" 
+              >Logout</a
+            >
+          </li>
+          <li>
+            <a routerLinkActive="active" [routerLink]="['/admin', 'login']"
+              >Login</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>

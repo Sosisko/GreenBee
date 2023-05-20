@@ -1,0 +1,22 @@
+<div class="image">
+  <a
+    [routerLink]="['/product', product.id]"
+    (mouseenter)="hover = true"
+    (mouseleave)="hover = false"
+  >
+    <quill-view-html
+      [content]="product.image"
+      styles="padding: 0"
+    ></quill-view-html>
+    <div class="btn-group" *ngIf="hover">YAAAAAAA</div>
+  </a>
+</div>
+<div class="product-title">
+  <a [routerLink]="['/product', product.id]">{{ product.title }}</a>
+</div>
+<div class="product-price">{{ product.price | currency }}</div>
+
+<a class="btn-add-cart">
+  <mat-icon fontIcon="local_mall"> </mat-icon>
+  <span>Добавить в корзину</span>
+</a>

@@ -1,0 +1,41 @@
+<form [formGroup]="form" class="form-login-admin" (ngSubmit)="submit()">
+  <h2>Login as Administrator</h2>
+<div *ngIf="message">
+  {{message}}
+</div>
+  <div
+    class="form-control"
+    [ngClass]="{
+      invalid: form.get('email')?.touched && form.get('email')?.invalid
+    }"
+  >
+    <label for="email">Email:</label>
+    <input id="email" type="email" formControlName="email" />
+    <div *ngIf="form.get('email')?.touched && form.get('email')?.invalid">
+      <small *ngIf="form.get('email')?.errors?.['required']"
+        >Введите Емайл</small
+      >
+      <small *ngIf="form.get('email')?.errors?.['email']"
+        >Вы ввели не Емайл</small
+      >
+    </div>
+  </div>
+  <div
+    class="form-control"
+    [ngClass]="{
+      invalid: form.get('password')?.touched && form.get('password')?.invalid
+    }"
+  >
+    <label for="password">Password:</label>
+    <input id="password" type="password" formControlName="password" />
+    <div *ngIf="form.get('password')?.touched && form.get('password')?.invalid">
+      <small *ngIf="form.get('password')?.errors?.['required']"
+        >Введите пароль</small
+      >
+      <small *ngIf="form.get('password')?.errors?.['minlength']"
+        >Пароль должен быть не менее 6 символов</small
+      >
+    </div>
+  </div>
+  <button type="submit" [disabled]="form.invalid || submitted" [ngClass]="form.invalid ? 'disabled' : ''" class="btn-login">Login</button>
+</form>

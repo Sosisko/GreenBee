@@ -1,0 +1,74 @@
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <h1>Создание продукта</h1>
+  <div
+    class="form-control"
+    [ngClass]="{
+      invalid: form.get('title')?.touched && form.get('title')?.invalid
+    }"
+  >
+    <label for="title">Название продукта:</label>
+    <input id="title" type="text" formControlName="title" />
+    <div *ngIf="form.get('title')?.touched && form.get('title')?.invalid">
+      <small *ngIf="form.get('title')?.errors?.['required']"
+        >Вы ничего не ввели</small
+      >
+    </div>
+  </div>
+
+  <div class="form-control">
+    <label for="type">Фото:</label>
+    <quill-editor formControlName="image"></quill-editor>
+  </div>
+  <div
+    class="form-control"
+    [ngClass]="{
+      invalid:
+        form.get('description')?.touched && form.get('description')?.invalid
+    }"
+  >
+    <label for="description">Описание:</label>
+    <input id="description" type="text" formControlName="description" />
+    <div
+      *ngIf="
+        form.get('description')?.touched && form.get('description')?.invalid
+      "
+    >
+      <small *ngIf="form.get('description')?.errors?.['required']"
+        >Введите описание</small
+      >
+    </div>
+  </div>
+  <div
+    class="form-control"
+    [ngClass]="{
+      invalid: form.get('category')?.touched && form.get('category')?.invalid
+    }"
+  >
+    <label for="category">Категория:</label>
+    <select formControlName="category">
+      <option value="Fruits">Fruits</option>
+      <option value="Vegetable">Vegetable</option>
+      <option value="Juices">Juices</option>
+    </select>
+    <div *ngIf="form.get('category')?.touched && form.get('category')?.invalid">
+      <small *ngIf="form.get('category')?.errors?.['required']"
+        >Выберете категорию товара</small
+      >
+    </div>
+  </div>
+  <div
+    class="form-control"
+    [ngClass]="{
+      invalid: form.get('price')?.touched && form.get('price')?.invalid
+    }"
+  >
+    <label for="price">Цена:</label>
+    <input id="price" type="number" formControlName="price" />
+    <div *ngIf="form.get('price')?.touched && form.get('price')?.invalid">
+      <small *ngIf="form.get('price')?.errors?.['required']"
+        >Вам нужно установить цену</small
+      >
+    </div>
+  </div>
+  <button type="submit">Создать продукт</button>
+</form>

@@ -1,0 +1,19 @@
+<h1>Discover Our Products</h1>
+<p>
+  At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
+  praesentium.
+</p>
+
+<div class="container">
+  <div class="products-list" *ngIf="products$ | async as products">
+    <app-product-page
+      class="producst-list--item"
+      *ngFor="let product of $any(products)"
+      [product]="product"
+    >
+      {{ product.title }}
+    </app-product-page>
+  </div>
+</div>
+
+<router-outlet></router-outlet>
