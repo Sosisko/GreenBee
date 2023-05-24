@@ -1,0 +1,45 @@
+<div *ngIf="product$ | async as product">
+  <div class="product">
+    <div class="breadcrumb">
+      <div class="container">
+        <button class="btn-back" routerLink="/">Back</button>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="content-wrapper">
+      <div class="image">
+        <quill-view-html
+          [content]="product.image"
+          styles="padding: 0"
+        ></quill-view-html>
+      </div>
+
+      <div class="content">
+        <div class="title">
+          <h2>{{ product.title }}</h2>
+        </div>
+        <div class="categories">
+          <span>Категория:</span>
+          <small>{{ product.category }}</small>
+        </div>
+        <div class="description">
+          <p>{{ product.description }}</p>
+        </div>
+        <div class="price">
+          <span>{{ product.price | currency}}</span>
+        </div>
+        <div class="product-add-to-cart">
+          <span class="control-label">Кол-во:</span>
+          <div class="product-quantity">
+            <div class="input-group">
+              <input type="number">
+              <a class="addToWishlist">В список желаемого</a>
+              <button class="btn-add-to-cart">Добавить в корзину</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

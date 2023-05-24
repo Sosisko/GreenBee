@@ -12,7 +12,7 @@ import { ProductsService } from 'src/app/services/products.service';
 export class AddPageComponent implements OnInit {
   form!: FormGroup;
   product: any
-
+  submitted = false;
 
   constructor(private productsService: ProductsService){}
 
@@ -30,6 +30,9 @@ export class AddPageComponent implements OnInit {
     if (this.form.invalid) {
       return;
     }
+
+    this.submitted = true;
+    
     const product: Product = {
       title: this.form.value.title,
       image: this.form.value.image,

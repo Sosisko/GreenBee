@@ -1,20 +1,33 @@
-<table>
-    <thead>
+<div *ngIf="loading; else productTable">
+  <div>Loading...</div>
+</div>
+
+<!-- <div>
+  <input type="text" placeholder="Найти продукт..." [(ngModel)] = "productName" >
+</div> -->
+
+<ng-template #productTable>
+  <div *ngIf="products?.length">
+    <table class="table">
+      <thead>
         <tr>
-            <th></th>
-            <th>Автор</th>
-            <th>Название</th>
-            <th>Дата</th>
-            <th>Действие</th>
+          <th>#</th>
+          <th>Название продукта</th>
+          <th>Цена</th>
+          <th>Дата</th>
+          <th>Править</th>
+          <th>Удалить</th>
         </tr>
-    </thead>
-    <tbody>
+      </thead>
+      <tbody>
         <tr *ngFor="let product of products; let idx = index">
-            <td>{{idx +1}}</td>
-            <td>{{product.title}}</td>
-            <td>{{product.data | date:'medium'}}</td>
-            <td>{{product.price}}</td>
-            <td></td>
+          <td>{{ idx + 1 }}</td>
+          <td>{{ product.title }}</td>
+          <td>{{ product.price }}</td>
+          <td>{{ product.date | date : "medium" }}</td>
+          <td class="btn-wrapper"><button class="btn btn-edit" [routerLink]="['/admin', 'product', product.id, 'edit']">Edit</button></td>
+          <td class="btn-wrapper"><button class="btn btn-del" (click)="remove(product.id)">Delete</button></td>
         </tr>
-    </tbody>
-</table>
+      </tbody>
+    </table></div
+></ng-template>

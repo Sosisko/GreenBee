@@ -1,5 +1,9 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+
+import { registerLocaleData } from '@angular/common';
+import localeRu from '@angular/common/locales/ru';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,11 +18,11 @@ import { ProductsCollectionPageComponent } from './products-collection-page/prod
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuillModule } from 'ngx-quill';
 import { HttpClientModule } from '@angular/common/http';
-import { ProductDetailPageComponent } from './product-detail-page/product-detail-page.component';
+import { ProductComponent } from './product/product.component';
+import { SearchPipe } from './services/search.pipe';
 
 
-
-
+registerLocaleData(localeRu, 'ru');
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,19 +32,23 @@ import { ProductDetailPageComponent } from './product-detail-page/product-detail
     CartPageComponent,
     ProductPageComponent,
     ProductsCollectionPageComponent,
-    ProductDetailPageComponent,
+    ProductComponent,
+    SearchPipe
   ],
   imports: [
-  BrowserModule,
+    BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatIconModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    QuillModule.forRoot()
-   ],
-  providers: [],
+    QuillModule.forRoot(),
+  ],
+  providers: [{ provide: LOCALE_ID, useValue: 'ru' }],
   bootstrap: [AppComponent],
+  exports: [
+    SearchPipe
+  ],
 })
 export class AppModule {}

@@ -1,0 +1,61 @@
+.breadcrumb {
+  background: #ededed;
+  padding: 10px 0;
+  margin-bottom: 80px;
+}
+
+.btn-back {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #0d7a52;
+  color: #fff;
+  cursor: pointer;
+}
+
+.content-wrapper {
+  display: flex;
+  gap: 40px;
+}
+
+.image,
+.content {
+  flex: 1 1 50%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.categories span {
+  margin-right: 50px;
+}
+.categories small {
+  color: #666;
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.price {
+  font-family: "Poppins", sans-serif;
+  font-size: 3rem;
+  font-weight: 800;
+  color: #0d7a52;
+  line-height: 1;
+}
+
+.description {
+  margin: 25px 0;
+  color: #666;
+}
+
+.price {
+  margin-bottom: 40px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}

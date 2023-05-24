@@ -70,5 +70,5 @@
       >
     </div>
   </div>
-  <button type="submit">Создать продукт</button>
+  <button type="submit" [disabled]="form.invalid || submitted">Создать продукт</button>
 </form>

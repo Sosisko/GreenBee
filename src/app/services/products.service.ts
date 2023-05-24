@@ -34,6 +34,25 @@ export class ProductsService {
         }
         ))
     }))
-    
+  }
+
+  getById(id:string) {
+    return this.http.get(`${environment.fbDbUrl}/products/${id}.json`)
+    //@ts-ignore //странная ошибка ts
+    .pipe(map((response: Product) => {
+      return {
+        ...response,
+        id,
+        date: new Date(response.date)
+      }
+    }))
+  }
+  
+  remove(id:string) {
+    return this.http.delete(`${environment.fbDbUrl}/products/${id}.json`)
+  }
+
+  update(product: Product) {
+    return this.http.patch(`${environment.fbDbUrl}/products/${product.id}.json`, product)
   }
 }

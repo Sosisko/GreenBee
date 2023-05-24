@@ -1,6 +1,4 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { ProductsService } from '../services/products.service';
-import { Observable, Subscription, map } from 'rxjs';
 
 @Component({
   selector: 'app-product-page',
@@ -10,4 +8,5 @@ import { Observable, Subscription, map } from 'rxjs';
 export class ProductPageComponent {
   @Input() product: any;
   hover: boolean = false;
+
 }
