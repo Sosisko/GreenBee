@@ -7,13 +7,13 @@ import { ProductsService } from '../services/products.service';
   styleUrls: ['./home-page.component.scss'],
 })
 export class HomePageComponent {
-  products$!:any;
+  products$!: any;
+  productName: any;
 
   constructor(private productsService: ProductsService) {}
 
   ngOnInit() {
-    this.products$ = this.productsService.getAll()
-
-    console.log(this.products$);
+    this.products$ = this.productsService.getAll();
+    //console.log(this.products$);
   }
 }

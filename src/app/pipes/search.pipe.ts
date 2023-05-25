@@ -5,14 +5,14 @@ import { Product } from '../models/interfaces';
   name: 'search',
 })
 export class SearchPipe implements PipeTransform {
-  transform(products: Product[], productName: ''): any {
+  transform(products: Product[], productName: string = ''): any {
     if (!productName.trim()) {
       return products;
     }
     return products.filter((product) => {
       return product.title
         .toLocaleLowerCase()
-        .includes(productName.toLocaleLowerCase());
+        .includes(productName.trim().toLocaleLowerCase());
     });
   }
 }

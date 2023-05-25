@@ -21,13 +21,12 @@
               >Products</a
             >
           </li>
-
         </ul>
       </nav>
       <div class="right-menu">
         <a [routerLink]="['/cart']">
           <mat-icon fontIcon="shopping_cart"></mat-icon>
-          <span class="cart-products-count">0</span>
+          <span class="cart-products-count">{{ productCount }}</span>
         </a>
       </div>
     </div>

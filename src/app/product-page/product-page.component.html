@@ -1,3 +1,4 @@
+
 <div class="image">
   <a
     [routerLink]="['/product', product.id]"
@@ -16,7 +17,7 @@
 </div>
 <div class="product-price">{{ product.price | currency }}</div>
 
-<a class="btn-add-cart">
-  <mat-icon fontIcon="local_mall"> </mat-icon>
+<button class="btn-add-cart" (click)="onAddToCart(product)">
+  <mat-icon fontIcon="local_mall"></mat-icon>
   <span>Добавить в корзину</span>
-</a>
+</button>

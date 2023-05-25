@@ -1,1 +1,38 @@
-<p>cart-page works!</p>
+<div class="container">
+  <div class="cart-wrapper" *ngIf="cartProducts.length > 0; else empty">
+    <h2 class="cart-title">Корзина покупок</h2>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Продукт</th>
+          <th>Цена</th>
+          <th>Кол-во</th>
+          <th>Сумма</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of cartProducts; let idx = index">
+          <td class="img">
+            <quill-view-html
+              [content]="product.image"
+              styles="padding: 0"
+            ></quill-view-html>
+          </td>
+          <td>{{ product.title }}</td>
+          <td>{{ product.price }}</td>
+          <td>Кол-во</td>
+          <td>Цена:<b>{{totalPrice}}</b></td>
+
+          <td class="btn-wrapper">
+            <button class="btn btn-del" (click)="onRemoveFromCart(product)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<ng-template #empty>
+  <h2 class="empty-cart-title">Корзина пуста</h2>
+</ng-template>

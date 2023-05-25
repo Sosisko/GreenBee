@@ -1,4 +1,6 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { Product } from '../models/interfaces';
+import { CartService } from '../services/cart.service';
 
 @Component({
   selector: 'app-product-page',
@@ -9,4 +11,11 @@ export class ProductPageComponent {
   @Input() product: any;
   hover: boolean = false;
 
+  constructor(private cartService: CartService) {}
+
+
+
+  onAddToCart(product: Product) {
+    this.cartService.addProductToCart(product);
+  }
 }

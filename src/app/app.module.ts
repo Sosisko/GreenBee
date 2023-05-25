@@ -19,7 +19,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { QuillModule } from 'ngx-quill';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductComponent } from './product/product.component';
-import { SearchPipe } from './services/search.pipe';
+import { PipesModule } from './pipes/pipes.module';
 
 
 registerLocaleData(localeRu, 'ru');
@@ -33,7 +33,7 @@ registerLocaleData(localeRu, 'ru');
     ProductPageComponent,
     ProductsCollectionPageComponent,
     ProductComponent,
-    SearchPipe
+
   ],
   imports: [
     BrowserModule,
@@ -43,12 +43,11 @@ registerLocaleData(localeRu, 'ru');
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    PipesModule,
     QuillModule.forRoot(),
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'ru' }],
   bootstrap: [AppComponent],
-  exports: [
-    SearchPipe
-  ],
+  exports: [],
 })
 export class AppModule {}

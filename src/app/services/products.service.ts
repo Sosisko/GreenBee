@@ -9,6 +9,8 @@ import { environment } from 'src/environments/environment';
 })
 export class ProductsService {
 
+
+
   constructor(private http: HttpClient) { }
 
   addProduct(product: Product): Observable<Product> {
@@ -55,4 +57,8 @@ export class ProductsService {
   update(product: Product) {
     return this.http.patch(`${environment.fbDbUrl}/products/${product.id}.json`, product)
   }
+
+
+    
+  
 }
