@@ -5,10 +5,9 @@
 </p>
 
 <div class="container">
-
-
   <div class="search-input-wrapper">
-    <input class="search-input"
+    <input
+      class="search-input"
       type="text"
       placeholder="Найти продукт..."
       [(ngModel)]="productName"
@@ -21,8 +20,6 @@
       *ngFor="let product of $any(products) | search : productName"
       [product]="product"
     >
-      {{ product.title }}
-
     </app-product-page>
   </div>
 </div>

@@ -24,10 +24,9 @@ export class CartPageComponent implements OnInit {
     }
   }
 
+
   onRemoveFromCart(product: any) {
-    this.totalPrice -= +product.price
-    this.cartProducts.splice(this.cartProducts.indexOf(product), 1)
-    
-    
-  }
+      this.totalPrice -= +product.price
+      this.cartService.removeProductFromCart(product)
+    }
 }

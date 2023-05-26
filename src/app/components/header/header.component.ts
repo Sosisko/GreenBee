@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription, count } from 'rxjs';
 import { CartService } from 'src/app/services/cart.service';
-import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
   selector: 'app-header',

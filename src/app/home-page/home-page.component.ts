@@ -14,6 +14,6 @@ export class HomePageComponent {
 
   ngOnInit() {
     this.products$ = this.productsService.getAll();
-    //console.log(this.products$);
+
   }
 }

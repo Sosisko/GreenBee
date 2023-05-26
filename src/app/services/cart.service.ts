@@ -1,36 +1,18 @@
-import { EventEmitter, Injectable, Output } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Product } from '../models/interfaces';
-import { BehaviorSubject, Subject } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  // cartProducts: Product[] = [];
-  // productCount = 0;
-
-  // constructor() {}
-
+  cartProducts: Product[] = [];
+  productCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   // //Метод every будет проверять каждый элемент массива и вернет true,
   // // если все элементы не соответствуют условию в колбэке, и false - если найден элемент,
   // // у которого совпадает id. Таким образом, если idExists равно true,
   // // значит продукта с таким же id в массиве нет и можно добавлять новый,
   // // иначе выведется сообщение "Этот товар уже есть в корзине!".
-  // addProductToCart(product: Product) {
-  //   const idExists = this.cartProducts.every((item) => item.id !== product.id);
-  //   if (idExists) {
-  //     this.cartProducts.push(product);
-  //     this.productCount = this.cartProducts.length;
-  //     console.log(this.productCount);
-  //     console.log('Товар добавлен в корзину!');
-  //   } else {
-  //     console.log('Этот товар уже есть в корзине!');
-  //     return;
-  //   }
-  // }
-  cartProducts: Product[] = [];
-  productCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-
   addProductToCart(product: Product) {
     const idExists = this.cartProducts.every((item) => item.id !== product.id);
     if (idExists) {
@@ -39,6 +21,20 @@ export class CartService {
       console.log('Товар добавлен в корзину!');
     } else {
       console.log('Этот товар уже есть в корзине!');
+      return;
+    }
+  }
+
+  removeProductFromCart(product: Product) {
+    const productIndex = this.cartProducts.findIndex(
+      (item) => item.id === product.id
+    );
+    if (productIndex !== -1) {
+      this.cartProducts.splice(productIndex, 1);
+      this.productCount.next(this.cartProducts.length);
+      console.log('Товар удален из корзины!');
+    } else {
+      console.log('Этого товара нет в корзине!');
       return;
     }
   }
