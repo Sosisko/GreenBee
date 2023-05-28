@@ -21,8 +21,8 @@
         <li class="price">
           <b> {{ product.price | currency }}</b>
         </li>
-        <li class="quantity">Кол-во</li>
-        <li class="total-price">
+        <li class="quantity">{{product.quantity}}</li>
+        <li class="sum-price">
           <b>{{ totalPrice | currency }}</b>
         </li>
 
@@ -35,6 +35,10 @@
 
         </li>
       </ul>
+
+      <div class="total-price">
+        <b>{{ totalPrice | currency }}</b>
+      </div>
     </div>
   </div>
 </div>

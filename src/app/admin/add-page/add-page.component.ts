@@ -11,10 +11,10 @@ import { ProductsService } from 'src/app/services/products.service';
 })
 export class AddPageComponent implements OnInit {
   form!: FormGroup;
-  product: any
+  product: any;
   submitted = false;
 
-  constructor(private productsService: ProductsService){}
+  constructor(private productsService: ProductsService) {}
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -32,19 +32,19 @@ export class AddPageComponent implements OnInit {
     }
 
     this.submitted = true;
-    
+
     const product: Product = {
       title: this.form.value.title,
       image: this.form.value.image,
       description: this.form.value.description,
       price: this.form.value.price,
       category: this.form.value.category,
-      date: new Date()
-    }
-    this.productsService.addProduct(product).subscribe(()=>{
-      this.form.reset()
-    })
+      date: new Date(),
+    };
+    this.productsService.addProduct(product).subscribe(() => {
+      this.form.reset();
+    });
     console.log(product);
-    this.product = product
+    this.product = product;
   }
 }

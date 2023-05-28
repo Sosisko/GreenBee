@@ -17,7 +17,9 @@ export interface User {
     price: number
     category: string
     date: Date
+    quantity?: number
   }
+
 
   export interface FbCreateResponse {
     name: string

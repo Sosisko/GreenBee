@@ -10,15 +10,17 @@ import { CartService } from '../services/cart.service';
 export class CartPageComponent implements OnInit {
   cartProducts: Product[] = [];
   totalPrice = 0;
-
+  sumProduct = 0;
   pSub!: Subscription;
-
 
   constructor(private cartService: CartService) {}
 
   ngOnInit() {
     this.cartProducts = this.cartService.cartProducts;
     console.log(this.cartProducts);
+
+ 
+
     for (let i = 0; i < this.cartProducts.length; i++) {
       this.totalPrice += +this.cartProducts[i].price;
     }

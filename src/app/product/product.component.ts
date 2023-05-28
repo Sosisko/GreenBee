@@ -12,7 +12,8 @@ import { CartService } from './../services/cart.service';
 })
 export class ProductComponent implements OnInit {
   product$!: Observable<any>;
-
+  quantity:number = 1
+  
   constructor(
     private productsService: ProductsService,
     private cartService: CartService,
@@ -28,6 +29,8 @@ export class ProductComponent implements OnInit {
   }
 
   addProduct(product: Product) {
-    this.cartService.addProductToCart(product);
+    product.quantity = this.quantity;
+    this.cartService.addProductToCart(product)
+    this.quantity = 1;
   }
 }

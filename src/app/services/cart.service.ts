@@ -15,6 +15,7 @@ export class CartService {
     image: 'Картинка',
     price: 20,
     title: 'Огурец',
+    quantity: 1
   },];
   productCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   // //Метод every будет проверять каждый элемент массива и вернет true,
@@ -25,6 +26,7 @@ export class CartService {
   addProductToCart(product: Product) {
     const idExists = this.cartProducts.every((item) => item.id !== product.id);
     if (idExists) {
+     
       this.cartProducts.push(product);
       this.productCount.next(this.cartProducts.length);
       console.log('Товар добавлен в корзину!');
