@@ -3,8 +3,45 @@
   At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
   praesentium.
 </p>
-
 <div class="container">
+  <ul class="category-list">
+    <li>
+      <a
+        [class.active]="!category || category == 'All'"
+        (click)="setCat('All')"
+      >
+        <div class="img-cate">
+          <img src="../../assets/images/icons/all.jpeg" alt="all" />
+        </div>
+        <div class="title-cate">All</div>
+      </a>
+    </li>
+    <li>
+      <a [class.active]="category == 'Fruits'" (click)="setCat('Fruits')"
+        ><div class="img-cate">
+          <img src="../../assets/images/icons/fru.jpg" alt="Fruits" />
+        </div>
+        <div class="title-cate">Fruits</div></a
+      >
+    </li>
+    <li>
+      <a [class.active]="category == 'Vegetable'" (click)="setCat('Vegetable')"
+        ><div class="img-cate">
+          <img src="../../assets/images/icons/veg.jpg" alt="Vegetable" />
+        </div>
+        <div class="title-cate">Vegetable</div></a
+      >
+    </li>
+    <li>
+      <a [class.active]="category == 'Juices'" (click)="setCat('Juices')"
+        ><div class="img-cate">
+          <img src="../../assets/images/icons/jus.jpg" alt="Juices" />
+        </div>
+        <div class="title-cate">Juices</div></a
+      >
+    </li>
+  </ul>
+
   <div class="search-input-wrapper">
     <input
       class="search-input"
@@ -14,14 +51,23 @@
     />
   </div>
 
-  <div class="products-list" *ngIf="products$ | async as products">
+  <div
+    class="products-list"
+    *ngIf="products$ | async as products; else loading"
+  >
     <app-product-page
       class="producst-list--item"
-      *ngFor="let product of $any(products) | search : productName"
+      *ngFor="
+        let product of $any(products)
+          | search : productName
+          | sortOfCategory : productsService.category
+      "
       [product]="product"
     >
     </app-product-page>
   </div>
+
+  <ng-template #loading>Загрузка продуктов...</ng-template>
 </div>
 
 <router-outlet></router-outlet>

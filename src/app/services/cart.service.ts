@@ -6,7 +6,16 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class CartService {
-  cartProducts: Product[] = [];
+  cartProducts: Product[] = [{
+    category: 'Vegetable',
+    date: new Date(),
+    description:
+      'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,...',
+    id: '-NWNP8wW0edG850jeY7t',
+    image: 'Картинка',
+    price: 20,
+    title: 'Огурец',
+  },];
   productCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   // //Метод every будет проверять каждый элемент массива и вернет true,
   // // если все элементы не соответствуют условию в колбэке, и false - если найден элемент,

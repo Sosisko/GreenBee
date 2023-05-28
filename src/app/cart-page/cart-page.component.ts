@@ -2,7 +2,6 @@ import { Component, OnInit, Output } from '@angular/core';
 import { Product } from '../models/interfaces';
 import { Subscription } from 'rxjs';
 import { CartService } from '../services/cart.service';
-
 @Component({
   selector: 'app-cart-page',
   templateUrl: './cart-page.component.html',
@@ -14,6 +13,7 @@ export class CartPageComponent implements OnInit {
 
   pSub!: Subscription;
 
+
   constructor(private cartService: CartService) {}
 
   ngOnInit() {
@@ -24,9 +24,8 @@ export class CartPageComponent implements OnInit {
     }
   }
 
-
   onRemoveFromCart(product: any) {
-      this.totalPrice -= +product.price
-      this.cartService.removeProductFromCart(product)
-    }
+    this.totalPrice -= +product.price;
+    this.cartService.removeProductFromCart(product);
+  }
 }

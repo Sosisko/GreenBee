@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription, count } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { CartService } from 'src/app/services/cart.service';
 
 @Component({

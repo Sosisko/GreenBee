@@ -6,12 +6,10 @@
   width: 300px;
   padding: 5px;
   border: none;
-
 }
 
 .search-input:focus {
-outline-color: darkgreen;
-
+  outline-color: darkgreen;
 }
 
 h1 {
@@ -48,4 +46,47 @@ p {
   border: none;
   box-shadow: 5px 6px 15px 0 rgba(0, 0, 0, 0.1);
   border: 1px solid transparent;
+}
+
+.category-list {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  border-bottom: 1px solid #eee;
+
+  li {
+    text-align: center;
+    a {
+      filter: grayscale(1);
+      cursor: pointer;
+      padding: 5px;
+
+      .title-cate {
+        color: #666;
+        padding-top: 13px;
+        font-family: "Poppins", sans-serif;
+      }
+      &:hover {
+        filter: grayscale(0);
+        .title-cate {
+          color: #78b144;
+        }
+      }
+      &.active {
+        filter: grayscale(0);
+        .title-cate {
+          color: #78b144;
+        }
+      }
+    }
+  }
+}
+
+.img-cate {
+  min-height: 36px;
+  img {
+    vertical-align: middle;
+    max-width: 32px;
+  }
 }

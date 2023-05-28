@@ -1,36 +1,41 @@
 <div class="container">
   <div class="cart-wrapper" *ngIf="cartProducts.length > 0; else empty">
     <h2 class="cart-title">Корзина покупок</h2>
-    <table class="table">
-      <thead>
-        <tr>
-          <th>Продукт</th>
-          <th>Цена</th>
-          <th>Кол-во</th>
-          <th>Сумма</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let product of cartProducts; let idx = index">
-          <td class="img">
-            <quill-view-html
-              [content]="product.image"
-              styles="padding: 0"
-            ></quill-view-html>
-          </td>
-          <td>{{ product.title }}</td>
-          <td>{{ product.price }}</td>
-          <td>Кол-во</td>
-          <td>Цена:<b>{{totalPrice}}</b></td>
+    <div class="cart-overview">
+      <ul class="cart-overview-header">
+        <li>Продукт</li>
+        <li>Цена</li>
+        <li>Кол-во</li>
+        <li>Сумма</li>
+      </ul>
 
-          <td class="btn-wrapper">
-            <button class="btn btn-del" (click)="onRemoveFromCart(product)">
-              Delete
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+      <ul
+        class="products-list"
+        *ngFor="let product of cartProducts; let idx = index"
+      >
+        <li class="img">
+          <quill-view-html [content]="product.image"></quill-view-html>
+        </li>
+        <li class="title">{{ product.title }}</li>
+
+        <li class="price">
+          <b> {{ product.price | currency }}</b>
+        </li>
+        <li class="quantity">Кол-во</li>
+        <li class="total-price">
+          <b>{{ totalPrice | currency }}</b>
+        </li>
+
+        <li class="btn-wrapper">
+          <mat-icon
+            class="btn btn-del"
+            (click)="onRemoveFromCart(product)"
+            fontIcon="delete_outline"
+          ></mat-icon>
+
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 <ng-template #empty>

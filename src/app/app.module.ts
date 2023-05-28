@@ -20,7 +20,7 @@ import { QuillModule } from 'ngx-quill';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductComponent } from './product/product.component';
 import { PipesModule } from './pipes/pipes.module';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 registerLocaleData(localeRu, 'ru');
 @NgModule({
@@ -44,6 +44,7 @@ registerLocaleData(localeRu, 'ru');
     ReactiveFormsModule,
     HttpClientModule,
     PipesModule,
+    FontAwesomeModule,
     QuillModule.forRoot(),
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'ru' }],

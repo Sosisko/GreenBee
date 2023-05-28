@@ -13,7 +13,7 @@ export interface User {
     id?: string
     title: string
     description: string
-    image?: string
+    image?: any
     price: number
     category: string
     date: Date
