@@ -6,20 +6,19 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root',
 })
 export class CartService {
-  cartProducts: Product[] = [
-    {
-      category: 'Vegetable',
-      date: new Date(),
-      description:
-        'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu,...',
-      id: '-NWNP8wW0edG850jeY7t',
-      image: 'Картинка',
-      price: 20,
-      title: 'Огурец',
-      quantity: 1,
-    },
-  ];
+  cartProducts: Product[] = JSON.parse(
+    localStorage.getItem('cartProducts') || '[]'
+  );
+
   productCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+
+
+  constructor() {
+    const productCount = JSON.parse(
+      localStorage.getItem('productCount') || '0'
+    );
+    this.productCount = new BehaviorSubject<number>(productCount);
+  }
 
   updateQuantity(product: Product, newQuantity: number | undefined) {
     const updatedProduct = { ...product, quantity: newQuantity };
@@ -28,6 +27,12 @@ export class CartService {
     );
     if (productIndex !== -1) {
       this.cartProducts.splice(productIndex, 1, updatedProduct);
+      localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
+      localStorage.setItem(
+        'productCount',
+        JSON.stringify(this.productCount.getValue())
+      );
+
       console.log('Количество товара обновлено!');
     } else {
       console.log('Этого товара нет в корзине!');
@@ -45,14 +50,18 @@ export class CartService {
     if (idExists) {
       this.cartProducts.push(product);
       this.productCount.next(this.cartProducts.length);
+      localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
+      localStorage.setItem(
+        'productCount',
+        JSON.stringify(this.productCount.getValue())
+      );
+
       console.log('Товар добавлен в корзину!');
     } else {
       console.log('Этот товар уже есть в корзине!');
       return;
     }
   }
-
- 
 
   removeProductFromCart(product: Product) {
     const productIndex = this.cartProducts.findIndex(
@@ -62,6 +71,12 @@ export class CartService {
     if (productIndex !== -1) {
       this.cartProducts.splice(productIndex, 1);
       this.productCount.next(this.cartProducts.length);
+      localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
+      localStorage.setItem(
+        'productCount',
+        JSON.stringify(this.productCount.getValue())
+      );
+
       console.log('Товар удален из корзины!');
     } else {
       console.log('Этого товара нет в корзине!');
@@ -75,6 +90,4 @@ export class CartService {
   getProductCountObservable() {
     return this.productCount.asObservable();
   }
-
-
 }
