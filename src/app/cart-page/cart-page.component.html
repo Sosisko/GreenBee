@@ -13,6 +13,7 @@
         class="products-list"
         *ngFor="let product of cartProducts; let idx = index"
       >
+
         <li class="img">
           <quill-view-html [content]="product.image"></quill-view-html>
         </li>
@@ -21,9 +22,31 @@
         <li class="price">
           <b> {{ product.price | currency }}</b>
         </li>
-        <li class="quantity">{{product.quantity}}</li>
+
+        <li class="quantity">
+          <div class="input-group">
+            <button class="btn-dec" (click)="decreaseQuantity(product)">
+              <mat-icon>remove</mat-icon>
+            </button>
+            <input
+              type="number"
+           
+              [(ngModel)]="product.quantity"
+              (ngModelChange)="updateTotal()"
+              oninput="if(this.value < 1) this.value = 1"
+              />
+              <!-- (change)="updateQuantity(product, product.quantity)" -->
+            <!-- <span>{{ product.quantity }}</span> -->
+            <button class="btn-inc" (click)="increaseQuantity(product)">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div>
+        </li>
+
         <li class="sum-price">
-          <b>{{ totalPrice | currency }}</b>
+          <b *ngIf="product.quantity">{{
+            product.price * product.quantity | currency
+          }}</b>
         </li>
 
         <li class="btn-wrapper">
@@ -32,12 +55,11 @@
             (click)="onRemoveFromCart(product)"
             fontIcon="delete_outline"
           ></mat-icon>
-
         </li>
       </ul>
 
       <div class="total-price">
-        <b>{{ totalPrice | currency }}</b>
+        <b>{{  totalPrice$ | async | currency}}</b>
       </div>
     </div>
   </div>

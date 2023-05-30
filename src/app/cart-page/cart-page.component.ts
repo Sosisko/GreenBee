@@ -1,6 +1,6 @@
 import { Component, OnInit, Output } from '@angular/core';
-import { Product } from '../models/interfaces';
-import { Subscription } from 'rxjs';
+import { CartProduct, Product } from '../models/interfaces';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { CartService } from '../services/cart.service';
 @Component({
   selector: 'app-cart-page',
@@ -9,25 +9,50 @@ import { CartService } from '../services/cart.service';
 })
 export class CartPageComponent implements OnInit {
   cartProducts: Product[] = [];
-  totalPrice = 0;
+  totalPrice$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   sumProduct = 0;
-  pSub!: Subscription;
+  productSumSubscription!: Subscription;
 
   constructor(private cartService: CartService) {}
+
+  updateQuantity(product: Product, newQuantity: number | undefined) {
+    this.cartService.updateQuantity(product, newQuantity);
+    this.updateTotal()
+  }
+
+  decreaseQuantity(product: Product) {
+    if (product.quantity !== undefined && product.quantity > 1) {
+      product.quantity--;
+      this.updateQuantity(product, product.quantity);
+    }
+  }
+
+  increaseQuantity(product: Product) {
+    if (product.quantity !== undefined) {
+      product.quantity++;
+      this.updateQuantity(product, product.quantity);
+    }
+  }
 
   ngOnInit() {
     this.cartProducts = this.cartService.cartProducts;
     console.log(this.cartProducts);
+    this.updateTotal();
+  }
 
- 
 
-    for (let i = 0; i < this.cartProducts.length; i++) {
-      this.totalPrice += +this.cartProducts[i].price;
-    }
+  updateTotal() {
+      const totalPrice = this.cartProducts.reduce(
+        //@ts-ignore
+        (total, product) => total + product.quantity * product.price,
+        0
+      );
+      // Обновляем значение totalPrice в BehaviorSubject
+      this.totalPrice$.next(totalPrice);
   }
 
   onRemoveFromCart(product: any) {
-    this.totalPrice -= +product.price;
     this.cartService.removeProductFromCart(product);
+    this.updateTotal();
   }
 }

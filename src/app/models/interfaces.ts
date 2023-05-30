@@ -21,6 +21,18 @@ export interface User {
   }
 
 
+  export interface CartProduct {
+    id?: string
+    title: string
+    description: string
+    image?: any
+    price: number
+    category: string
+    date: Date
+    quantity: number
+
+  }
+
   export interface FbCreateResponse {
     name: string
   }
