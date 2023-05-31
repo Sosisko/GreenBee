@@ -21,6 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductComponent } from './product/product.component';
 import { PipesModule } from './pipes/pipes.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {MatGridListModule} from '@angular/material/grid-list';
+
 
 registerLocaleData(localeRu, 'ru');
 @NgModule({
@@ -45,6 +47,7 @@ registerLocaleData(localeRu, 'ru');
     HttpClientModule,
     PipesModule,
     FontAwesomeModule,
+    MatGridListModule,
     QuillModule.forRoot(),
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'ru' }],

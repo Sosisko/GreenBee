@@ -1,69 +1,70 @@
 <div class="container">
+  <ng-template #empty>
+    <h2 class="empty-cart-title">Корзина пуста</h2>
+  </ng-template>
+
   <div class="cart-wrapper" *ngIf="cartProducts.length > 0; else empty">
     <h2 class="cart-title">Корзина покупок</h2>
-    <div class="cart-overview">
-      <ul class="cart-overview-header">
-        <li>Продукт</li>
-        <li>Цена</li>
-        <li>Кол-во</li>
-        <li>Сумма</li>
-      </ul>
 
-      <ul
-        class="products-list"
-        *ngFor="let product of cartProducts; let idx = index"
+    <mat-grid-list
+      class="cart-overview-header"
+      mat-grid-tile-header
+      cols="9"
+      rowHeight="2:1"
+    >
+      <mat-grid-tile colspan="2">Продукт</mat-grid-tile>
+      <mat-grid-tile colspan="2">Цена</mat-grid-tile>
+      <mat-grid-tile colspan="2">Кол-во</mat-grid-tile>
+      <mat-grid-tile colspan="2">Сумма</mat-grid-tile>
+      <mat-grid-tile colspan="1"></mat-grid-tile>
+    </mat-grid-list>
+    <mat-grid-list
+      class="product-item"
+      *ngFor="let product of cartProducts"
+      cols="9"
+      rowHeight="1:1"
+    >
+      <mat-grid-tile colspan="2"
+        ><quill-view-html
+          class="img"
+          [content]="product.image"
+        ></quill-view-html
+        >{{ product.title }}</mat-grid-tile
       >
+      <mat-grid-tile colspan="2"
+        ><b> {{ product.price | currency }}</b></mat-grid-tile
+      >
+      <mat-grid-tile colspan="2" class="quantity">
+        <div class="input-group">
+          <button class="btn-dec" (click)="decreaseQuantity(product)">
+            <mat-icon>remove</mat-icon>
+          </button>
+          <input
+            type="number"
+            [(ngModel)]="product.quantity"
+            (ngModelChange)="updateTotal()"
+            oninput="if(this.value < 1) this.value = 1"
+          />
 
-        <li class="img">
-          <quill-view-html [content]="product.image"></quill-view-html>
-        </li>
-        <li class="title">{{ product.title }}</li>
+          <button class="btn-inc" (click)="increaseQuantity(product)">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div></mat-grid-tile
+      >
+      <mat-grid-tile colspan="2"
+        ><b *ngIf="product.quantity">{{ product.price * product.quantity | currency }}</b></mat-grid-tile
+      >
+      <mat-grid-tile colspan="1"
+        ><mat-icon
+          class="btn btn-del"
+          (click)="onRemoveFromCart(product)"
+          fontIcon="delete_outline"
+        ></mat-icon
+      ></mat-grid-tile>
+    </mat-grid-list>
 
-        <li class="price">
-          <b> {{ product.price | currency }}</b>
-        </li>
-
-        <li class="quantity">
-          <div class="input-group">
-            <button class="btn-dec" (click)="decreaseQuantity(product)">
-              <mat-icon>remove</mat-icon>
-            </button>
-            <input
-              type="number"
-           
-              [(ngModel)]="product.quantity"
-              (ngModelChange)="updateTotal()"
-              oninput="if(this.value < 1) this.value = 1"
-              />
-              <!-- (change)="updateQuantity(product, product.quantity)" -->
-            <!-- <span>{{ product.quantity }}</span> -->
-            <button class="btn-inc" (click)="increaseQuantity(product)">
-              <mat-icon>add</mat-icon>
-            </button>
-          </div>
-        </li>
-
-        <li class="sum-price">
-          <b *ngIf="product.quantity">{{
-            product.price * product.quantity | currency
-          }}</b>
-        </li>
-
-        <li class="btn-wrapper">
-          <mat-icon
-            class="btn btn-del"
-            (click)="onRemoveFromCart(product)"
-            fontIcon="delete_outline"
-          ></mat-icon>
-        </li>
-      </ul>
-
-      <div class="total-price">
-        <b>{{  totalPrice$ | async | currency}}</b>
-      </div>
+    <div class="total-price">
+      <b>{{ totalPrice$ | async | currency }}</b>
     </div>
   </div>
 </div>
-<ng-template #empty>
-  <h2 class="empty-cart-title">Корзина пуста</h2>
-</ng-template>
