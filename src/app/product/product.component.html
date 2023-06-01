@@ -27,16 +27,35 @@
           <p>{{ product.description }}</p>
         </div>
         <div class="price">
-          <span>{{ product.price | currency}}</span>
+          <span>{{ product.price | currency }}</span>
         </div>
         <div class="product-add-to-cart">
-          <span class="control-label">Кол-во:</span>
           <div class="product-quantity">
             <div class="input-group">
-              <input type="number"[(ngModel)]="quantity">
-              <a class="addToWishlist">В список желаемого</a>
-              <button class="btn-add-to-cart" (click)="addProduct(product)">Добавить в корзину</button>
+              <div><span class="input-label">Кол-во:</span></div>
+              <button class="btn-dec" (click)="decreaseQuantity()">
+                <mat-icon>remove</mat-icon>
+              </button>
+              <input
+                type="number"
+                [(ngModel)]="quantity"
+                oninput="if(this.value < 1) this.value = 1"
+              />
+              <button class="btn-inc" (click)="increaseQuantity()">
+                <mat-icon>add</mat-icon>
+              </button>
             </div>
+            <div>
+              <button class="addToWishlist">
+                <mat-icon>favorite_border</mat-icon>В список желаемого
+              </button>
+            </div>
+          </div>
+
+          <div>
+            <button class="btn-add-to-cart" (click)="addProduct(product)">
+              Добавить в корзину
+            </button>
           </div>
         </div>
       </div>

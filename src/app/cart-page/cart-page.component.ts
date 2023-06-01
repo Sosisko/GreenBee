@@ -10,6 +10,7 @@ import { CartService } from '../services/cart.service';
 export class CartPageComponent implements OnInit {
   cartProducts: Product[] = [];
   totalPrice$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  totalQuantity$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   sumProduct = 0;
   productSumSubscription!: Subscription;
 
@@ -17,7 +18,7 @@ export class CartPageComponent implements OnInit {
 
   updateQuantity(product: Product, newQuantity: number | undefined) {
     this.cartService.updateQuantity(product, newQuantity);
-    this.updateTotal()
+    this.updateTotal();
   }
 
   decreaseQuantity(product: Product) {
@@ -40,15 +41,23 @@ export class CartPageComponent implements OnInit {
     this.updateTotal();
   }
 
-
   updateTotal() {
-      const totalPrice = this.cartProducts.reduce(
-        //@ts-ignore
-        (total, product) => total + product.quantity * product.price,
-        0
-      );
-      // Обновляем значение totalPrice в BehaviorSubject
-      this.totalPrice$.next(totalPrice);
+    const totalPrice = this.cartProducts.reduce(
+      //@ts-ignore
+      (total, product) => total + product.quantity * product.price,
+      0
+    );
+    // Обновляем значение totalPrice в BehaviorSubject
+    this.totalPrice$.next(totalPrice);
+
+    //Считаем общее количество товаров в корзине
+    const totalQuantity = this.cartProducts.reduce(
+      //@ts-ignore
+      (total, product) => total + product.quantity,
+      0
+    );
+    // Обновляем значение totalPrice в BehaviorSubject
+    this.totalQuantity$.next(totalQuantity);
   }
 
   onRemoveFromCart(product: any) {

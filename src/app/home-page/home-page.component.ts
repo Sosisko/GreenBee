@@ -20,6 +20,7 @@ export class HomePageComponent {
 
   ngOnInit() {
     this.products$ = this.productsService.getAll();
+    this.productsService.setCategory(this.category) //При переключении страницы, чтобы возвращалось в категорию All
   }
 
   setCat(category: string) {

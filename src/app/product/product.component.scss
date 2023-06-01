@@ -55,7 +55,118 @@
   margin-bottom: 40px;
 }
 
-.input-group {
+.input-label {
+  color: #444;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 10px;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+.product-quantity {
   display: flex;
-  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 40px;
+}
+
+.addToWishlist {
+  display: flex;
+  align-items: center;
+  margin-left: 60px;
+  background-color: #f6f6f6;
+  border: 1px solid #ebebeb;
+  height: 40px;
+  line-height: 37px;
+  padding: 0 25px 0 15px;
+  border-radius: 3px;
+  margin-left: 60px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #666;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+
+  mat-icon {
+    transform: scale(0.6);
+    color: #0d7a52;
+  }
+  &:hover {
+    background-color: #0d7a52;
+    color: #fff;
+    mat-icon {
+      color: #fff;
+    }
+  }
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none; // Yeah, yeah everybody write about it
+}
+
+input[type="number"],
+input[type="number"]:hover,
+input[type="number"]:focus {
+  appearance: none;
+  -moz-appearance: textfield;
+}
+
+.input-group {
+  width: 100px;
+  position: relative;
+  max-width: 200px;
+
+  input {
+    max-width: 50px;
+    margin-left: 37px;
+    color: #444;
+    height: 40px;
+    font-size: 14px;
+    border: 1px solid #ebebeb;
+    background-color: #f6f6f6;
+    text-align: center;
+    border-radius: 3px;
+    position: relative;
+    outline: none;
+  }
+  button {
+    position: absolute;
+    height: 40px;
+    border: 1px solid #ebebeb;
+    color: #989898;
+    background-color: #fff;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .btn-dec {
+    left: 0;
+  }
+  .btn-inc {
+    right: -24px;
+  }
+}
+
+.btn-add-to-cart {
+  padding: 0 24px;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 800;
+  height: 50px;
+  line-height: 50px;
+  text-transform: uppercase;
+  font-family: "Poppins", sans-serif;
+  border: none;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 50px;
+  background-color: #0d7a52;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+  &:hover {
+    color: #fff;
+    background: #78b144;
+  }
 }

@@ -4,67 +4,93 @@
   </ng-template>
 
   <div class="cart-wrapper" *ngIf="cartProducts.length > 0; else empty">
-    <h2 class="cart-title">Корзина покупок</h2>
+    <div class="cart-content">
+      <h2 class="cart-title">Корзина покупок</h2>
 
-    <mat-grid-list
-      class="cart-overview-header"
-      mat-grid-tile-header
-      cols="9"
-      rowHeight="2:1"
-    >
-      <mat-grid-tile colspan="2">Продукт</mat-grid-tile>
-      <mat-grid-tile colspan="2">Цена</mat-grid-tile>
-      <mat-grid-tile colspan="2">Кол-во</mat-grid-tile>
-      <mat-grid-tile colspan="2">Сумма</mat-grid-tile>
-      <mat-grid-tile colspan="1"></mat-grid-tile>
-    </mat-grid-list>
-    <mat-grid-list
-      class="product-item"
-      *ngFor="let product of cartProducts"
-      cols="9"
-      rowHeight="1:1"
-    >
-      <mat-grid-tile colspan="2"
-        ><quill-view-html
-          class="img"
-          [content]="product.image"
-        ></quill-view-html
-        >{{ product.title }}</mat-grid-tile
+      <mat-grid-list
+        class="cart-overview-header"
+        mat-grid-tile-header
+        cols="9"
+        rowHeight="2:1"
       >
-      <mat-grid-tile colspan="2"
-        ><b> {{ product.price | currency }}</b></mat-grid-tile
+        <mat-grid-tile colspan="2">Продукт</mat-grid-tile>
+        <mat-grid-tile colspan="2">Цена</mat-grid-tile>
+        <mat-grid-tile colspan="2">Кол-во</mat-grid-tile>
+        <mat-grid-tile colspan="2">Сумма</mat-grid-tile>
+        <mat-grid-tile colspan="1"></mat-grid-tile>
+      </mat-grid-list>
+      <mat-grid-list
+        class="product-item"
+        *ngFor="let product of cartProducts"
+        cols="9"
+        rowHeight="1:1"
       >
-      <mat-grid-tile colspan="2" class="quantity">
-        <div class="input-group">
-          <button class="btn-dec" (click)="decreaseQuantity(product)">
-            <mat-icon>remove</mat-icon>
-          </button>
-          <input
-            type="number"
-            [(ngModel)]="product.quantity"
-            (ngModelChange)="updateTotal()"
-            oninput="if(this.value < 1) this.value = 1"
-          />
+        <mat-grid-tile colspan="2"
+          ><quill-view-html
+            class="img"
+            [content]="product.image"
+          ></quill-view-html
+          >{{ product.title }}</mat-grid-tile
+        >
+        <mat-grid-tile colspan="2"
+          ><b> {{ product.price | currency }}</b></mat-grid-tile
+        >
+        <mat-grid-tile colspan="2" class="quantity">
+          <div class="input-group">
+            <button class="btn-dec" (click)="decreaseQuantity(product)">
+              <mat-icon>remove</mat-icon>
+            </button>
+            <input
+              type="number"
+              [(ngModel)]="product.quantity"
+              (ngModelChange)="updateTotal()"
+              oninput="if(this.value < 1) this.value = 1"
+            />
 
-          <button class="btn-inc" (click)="increaseQuantity(product)">
-            <mat-icon>add</mat-icon>
-          </button>
-        </div></mat-grid-tile
-      >
-      <mat-grid-tile colspan="2"
-        ><b *ngIf="product.quantity">{{ product.price * product.quantity | currency }}</b></mat-grid-tile
-      >
-      <mat-grid-tile colspan="1"
-        ><mat-icon
-          class="btn btn-del"
-          (click)="onRemoveFromCart(product)"
-          fontIcon="delete_outline"
-        ></mat-icon
-      ></mat-grid-tile>
-    </mat-grid-list>
+            <button class="btn-inc" (click)="increaseQuantity(product)">
+              <mat-icon>add</mat-icon>
+            </button>
+          </div></mat-grid-tile
+        >
+        <mat-grid-tile class="product-sum" colspan="2"
+          ><b *ngIf="product.quantity">{{
+            product.price * product.quantity | currency
+          }}</b></mat-grid-tile
+        >
+        <mat-grid-tile colspan="1"
+          ><mat-icon
+            class="btn btn-del"
+            (click)="onRemoveFromCart(product)"
+            fontIcon="delete_outline"
+          ></mat-icon
+        ></mat-grid-tile>
+      </mat-grid-list>
 
-    <div class="total-price">
-      <b>{{ totalPrice$ | async | currency }}</b>
+      <button routerLink="/" class="btn-back-to-shop">
+        Продолжить покупки
+      </button>
+    </div>
+
+    <div class="cart-total-content">
+      <div class="cart-total-content--title">
+        У вас <span>{{totalQuantity$ | async}}</span> товаров в корзине
+      </div>
+      <div class="group-price">
+        <div class="cart-total-product-price">
+          Total products:
+          <span>{{ totalPrice$ | async | currency }}</span>
+        </div>
+        <div class="cart-total--shipping">
+          Total Shipping:
+          <span>Free</span>
+        </div>
+      </div>
+
+      <div class="cart-total-price">
+        Total
+        <span>{{ totalPrice$ | async | currency }}</span>
+      </div>
+      <button class="btn-checkout">Checkout</button>
     </div>
   </div>
 </div>

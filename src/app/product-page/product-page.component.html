@@ -1,16 +1,14 @@
-
-<div class="image">
-  <a
-    [routerLink]="['/product', product.id]"
-    (mouseenter)="hover = true"
-    (mouseleave)="hover = false"
-  >
-    <quill-view-html
-      [content]="product.image"
-      styles="padding: 0"
-    ></quill-view-html>
-    <div class="btn-group" *ngIf="hover">YAAAAAAA</div>
-  </a>
+<div class="image" (mouseenter)="animate()" (mouseleave)="animate()">
+  <quill-view-html
+    [content]="product.image"
+    styles="padding: 0"
+  ></quill-view-html>
+  <div class="btn-group">
+    <button [@btnOne]="btnState" [routerLink]="['/product', product.id]">
+      <mat-icon>search</mat-icon>
+    </button>
+    <button [@btnTwo]="btnState"><mat-icon>favorite_border</mat-icon></button>
+  </div>
 </div>
 <div class="product-title">
   <a [routerLink]="['/product', product.id]">{{ product.title }}</a>

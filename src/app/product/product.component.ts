@@ -28,6 +28,21 @@ export class ProductComponent implements OnInit {
     );
   }
 
+
+  decreaseQuantity() {
+    if (this.quantity !== undefined && this.quantity > 1) {
+      this.quantity--;
+
+    }
+  }
+
+  increaseQuantity() {
+    if (this.quantity !== undefined) {
+      this.quantity++;
+
+    }
+  }
+
   addProduct(product: Product) {
     product.quantity = this.quantity;
     this.cartService.addProductToCart(product)

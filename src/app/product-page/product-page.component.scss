@@ -3,7 +3,34 @@
 }
 .btn-group {
   position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: 100%;
+  bottom: 10px;
+  button {
+    background: #fff;
+    border-radius: 100%;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15);
+    border:none;
+    font-size: 0;
+    width: 40px;
+    height: 40px;
+    color: #bdbdbd;
+    cursor: pointer;
+    transition: all 0.3s linear;
+    mat-icon {
+      transform: scale(0.7);
+    }
+    &:hover {
+      color: #fff;
+      background-color: #78b144;
+      transition: all 0.3s linear;
+    }
+  }
 }
+
 .product-title {
   font-weight: 600;
   font-family: "Wix Madefor Display", sans-serif;
@@ -26,7 +53,6 @@
   padding-bottom: 20px;
 }
 
-
 .btn-add-cart {
   display: inline-flex;
   align-items: center;
@@ -41,7 +67,6 @@
   border-radius: 40px;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
-
 }
 
 .btn-add-cart mat-icon {
@@ -51,7 +76,7 @@
 }
 
 .btn-add-cart span {
-    line-height: 1;
+  line-height: 1;
 }
 
 .btn-add-cart:hover {
