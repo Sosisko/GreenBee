@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
 
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -21,8 +20,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { ProductComponent } from './product/product.component';
 import { PipesModule } from './pipes/pipes.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import {MatGridListModule} from '@angular/material/grid-list';
-
+import { MatGridListModule } from '@angular/material/grid-list';
+import { AlertComponent } from './shared/alert/alert.component';
+import { AlertService } from './services/alert.service';
+import { CartPagePrewievComponent } from './cart-page-prewiev/cart-page-prewiev.component';
+import {NgxPaginationModule} from 'ngx-pagination'; 
 
 registerLocaleData(localeRu, 'ru');
 @NgModule({
@@ -35,7 +37,8 @@ registerLocaleData(localeRu, 'ru');
     ProductPageComponent,
     ProductsCollectionPageComponent,
     ProductComponent,
-
+    AlertComponent,
+    CartPagePrewievComponent,
   ],
   imports: [
     BrowserModule,
@@ -48,9 +51,10 @@ registerLocaleData(localeRu, 'ru');
     PipesModule,
     FontAwesomeModule,
     MatGridListModule,
+    NgxPaginationModule,
     QuillModule.forRoot(),
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'ru' }],
+  providers: [{ provide: LOCALE_ID, useValue: 'ru' }, AlertService],
   bootstrap: [AppComponent],
   exports: [],
 })

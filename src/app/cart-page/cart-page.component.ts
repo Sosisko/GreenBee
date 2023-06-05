@@ -1,16 +1,19 @@
-import { Component, OnInit, Output } from '@angular/core';
-import { CartProduct, Product } from '../models/interfaces';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { Component, OnInit, Output, OnDestroy } from '@angular/core';
+import { Product } from '../models/interfaces';
+
 import { CartService } from '../services/cart.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-cart-page',
   templateUrl: './cart-page.component.html',
   styleUrls: ['./cart-page.component.scss'],
 })
-export class CartPageComponent implements OnInit {
+export class CartPageComponent implements OnInit, OnDestroy {
   cartProducts: Product[] = [];
-  totalPrice$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  totalQuantity$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  totalPrice!: number;
+  totalQuantity!: number;
+  pSub!: Subscription;
+  qSub!: Subscription;
   sumProduct = 0;
   productSumSubscription!: Subscription;
 
@@ -39,29 +42,29 @@ export class CartPageComponent implements OnInit {
     this.cartProducts = this.cartService.cartProducts;
     console.log(this.cartProducts);
     this.updateTotal();
+    console.log(this.totalPrice);
   }
 
   updateTotal() {
-    const totalPrice = this.cartProducts.reduce(
-      //@ts-ignore
-      (total, product) => total + product.quantity * product.price,
-      0
-    );
-    // Обновляем значение totalPrice в BehaviorSubject
-    this.totalPrice$.next(totalPrice);
-
-    //Считаем общее количество товаров в корзине
-    const totalQuantity = this.cartProducts.reduce(
-      //@ts-ignore
-      (total, product) => total + product.quantity,
-      0
-    );
-    // Обновляем значение totalPrice в BehaviorSubject
-    this.totalQuantity$.next(totalQuantity);
+    this.pSub = this.cartService.totalPrice$.subscribe((totalPrice) => {
+      this.totalPrice = totalPrice;
+    });
+    this.qSub = this.cartService.totalQuantity$.subscribe((totalQuantity) => {
+      this.totalQuantity = totalQuantity;
+    });
   }
 
   onRemoveFromCart(product: any) {
     this.cartService.removeProductFromCart(product);
     this.updateTotal();
+  }
+
+  ngOnDestroy() {
+    if(this.pSub) {
+      this.pSub.unsubscribe()
+    }
+    if(this.qSub) {
+      this.qSub.unsubscribe()
+    }
   }
 }

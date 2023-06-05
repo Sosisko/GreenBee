@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { Product } from 'src/app/models/interfaces';
 import { CartService } from 'src/app/services/cart.service';
 
 @Component({
@@ -11,13 +12,20 @@ export class HeaderComponent implements OnInit {
   productCount: number = 0;
   productCountSubscription!: Subscription;
 
-  constructor( private cartService: CartService) { }
+  cartProduct!: Product[];
+
+  showCartPreview = false;
+
+  constructor(private cartService: CartService) {}
 
   ngOnInit() {
-   
-    this.productCountSubscription = this.cartService.getProductCountObservable().subscribe((count) => {
-      this.productCount = count;
-    });
+    this.cartProduct = this.cartService.cartProducts;
+
+    this.productCountSubscription = this.cartService
+      .getProductCountObservable()
+      .subscribe((count) => {
+        this.productCount = count;
+      });
   }
 
   ngOnDestroy(): void {

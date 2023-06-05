@@ -1,1 +1,7 @@
-<p>products-collection-page works!</p>
+<div >
+    <ul>
+        <li *ngFor="let product of products | paginate: { itemsPerPage: 5, currentPage: p }">{{product.title}} </li>
+      </ul>
+                 
+      <pagination-controls (pageChange)="p = $event"></pagination-controls>
+</div>

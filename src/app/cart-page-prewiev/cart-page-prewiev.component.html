@@ -1,0 +1,27 @@
+<div class="wrapper">
+  <ul>
+    <li class="product" *ngFor="let product of cartProducts">
+      <div class="products-item img">
+        <quill-view-html [content]="product.image"></quill-view-html>
+      </div>
+      <div class="flex">
+        <div>
+          <p>{{ product.title }}</p>
+          <p>
+            <b> {{ product.price | currency }} x {{ product.quantity }}</b>
+          </p>
+        </div>
+      </div>
+      <button class="del-btn" (click)="onRemoveFromCart(product)">
+        <mat-icon>delete_outline</mat-icon>
+      </button>
+    </li>
+  </ul>
+  <div class="cart-prewiev-footer">
+    <div class="cart-total-price">
+      <p>Сумма:</p>
+      <span>{{ totalPrice | currency }}</span>
+    </div>
+    <button routerLink="/cart" class="btn-into-cart">В корзину</button>
+  </div>
+</div>

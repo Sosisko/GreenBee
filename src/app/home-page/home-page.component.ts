@@ -13,6 +13,9 @@ export class HomePageComponent {
 
   category = '';
 
+  p: number = 1;
+  collection: any[] = this.products$;
+
   constructor(
     public productsService: ProductsService,
     private router: Router
@@ -20,7 +23,7 @@ export class HomePageComponent {
 
   ngOnInit() {
     this.products$ = this.productsService.getAll();
-    this.productsService.setCategory(this.category) //При переключении страницы, чтобы возвращалось в категорию All
+    this.productsService.setCategory(this.category); //При переключении страницы, чтобы возвращалось в категорию All
   }
 
   setCat(category: string) {
@@ -29,10 +32,10 @@ export class HomePageComponent {
       this.router.navigate(['/'], {
         queryParams: {
           category: this.category,
-        }
+        },
       });
-      this.productsService.setCategory(this.category)
-    } 
+      this.productsService.setCategory(this.category);
+      this.p = 1;
     }
   }
-
+}

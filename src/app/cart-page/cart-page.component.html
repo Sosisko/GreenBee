@@ -1,6 +1,7 @@
 <div class="container">
   <ng-template #empty>
     <h2 class="empty-cart-title">Корзина пуста</h2>
+    <button routerLink="/" class="btn-back-to-shop">Перейти в магазин</button>
   </ng-template>
 
   <div class="cart-wrapper" *ngIf="cartProducts.length > 0; else empty">
@@ -73,12 +74,12 @@
 
     <div class="cart-total-content">
       <div class="cart-total-content--title">
-        У вас <span>{{totalQuantity$ | async}}</span> товаров в корзине
+        У вас <span>{{ totalQuantity }}</span> товаров в корзине
       </div>
       <div class="group-price">
         <div class="cart-total-product-price">
           Total products:
-          <span>{{ totalPrice$ | async | currency }}</span>
+          <span>{{ totalPrice | currency }}</span>
         </div>
         <div class="cart-total--shipping">
           Total Shipping:
@@ -88,7 +89,7 @@
 
       <div class="cart-total-price">
         Total
-        <span>{{ totalPrice$ | async | currency }}</span>
+        <span>{{ totalPrice | currency }}</span>
       </div>
       <button class="btn-checkout">Checkout</button>
     </div>

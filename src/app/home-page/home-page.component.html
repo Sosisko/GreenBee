@@ -5,35 +5,32 @@
 </p>
 <div class="container">
   <ul class="category-list">
-    <li>
-      <a
-        [class.active]="!category || category == 'All'"
-        (click)="setCat('All')"
-      >
+    <li [class.active]="!category || category == 'All'">
+      <a (click)="setCat('All')">
         <div class="img-cate">
           <img src="../../assets/images/icons/all.jpeg" alt="all" />
         </div>
         <div class="title-cate">All</div>
       </a>
     </li>
-    <li>
-      <a [class.active]="category == 'Fruits'" (click)="setCat('Fruits')"
+    <li [class.active]="category == 'Fruits'">
+      <a (click)="setCat('Fruits')"
         ><div class="img-cate">
           <img src="../../assets/images/icons/fru.jpg" alt="Fruits" />
         </div>
         <div class="title-cate">Fruits</div></a
       >
     </li>
-    <li>
-      <a [class.active]="category == 'Vegetable'" (click)="setCat('Vegetable')"
+    <li [class.active]="category == 'Vegetable'">
+      <a (click)="setCat('Vegetable')"
         ><div class="img-cate">
           <img src="../../assets/images/icons/veg.jpg" alt="Vegetable" />
         </div>
         <div class="title-cate">Vegetable</div></a
       >
     </li>
-    <li>
-      <a [class.active]="category == 'Juices'" (click)="setCat('Juices')"
+    <li [class.active]="category == 'Juices'">
+      <a (click)="setCat('Juices')"
         ><div class="img-cate">
           <img src="../../assets/images/icons/jus.jpg" alt="Juices" />
         </div>
@@ -61,13 +58,17 @@
         let product of $any(products)
           | search : productName
           | sortOfCategory : productsService.category
+          | paginate : { itemsPerPage: 8, currentPage: p }
       "
       [product]="product"
     >
     </app-product-page>
   </div>
-
+  <pagination-controls
+    *ngIf="products$ | async as products"
+    class="pagination"
+    (pageChange)="p = $event"
+  ></pagination-controls>
   <ng-template #loading>Загрузка продуктов...</ng-template>
 </div>
-
 <router-outlet></router-outlet>

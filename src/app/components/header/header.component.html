@@ -23,11 +23,14 @@
           </li>
         </ul>
       </nav>
-      <div class="right-menu">
+      <div class="right-menu" (mouseenter)="showCartPreview = true  && cartProduct.length > 0" >
         <a [routerLink]="['/cart']">
           <mat-icon fontIcon="shopping_cart"></mat-icon>
           <span class="cart-products-count">{{ productCount }}</span>
         </a>
+        <div class="cart-prewiev" *ngIf="showCartPreview">
+          <app-cart-page-prewiev (mouseleave)="showCartPreview = false"></app-cart-page-prewiev>
+        </div>
       </div>
     </div>
   </div>

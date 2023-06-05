@@ -1,24 +1,29 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { Product } from '../models/interfaces';
 import { BehaviorSubject } from 'rxjs';
+import { AlertService } from './alert.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CartService {
+export class CartService implements OnInit {
   cartProducts: Product[] = JSON.parse(
     localStorage.getItem('cartProducts') || '[]'
   );
 
   productCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  totalPrice$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  totalQuantity$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
-
-  constructor() {
+  constructor(private alertService: AlertService) {
     const productCount = JSON.parse(
       localStorage.getItem('productCount') || '0'
     );
     this.productCount = new BehaviorSubject<number>(productCount);
+    this.updateTotal();
   }
+
+  ngOnInit() {}
 
   updateQuantity(product: Product, newQuantity: number | undefined) {
     const updatedProduct = { ...product, quantity: newQuantity };
@@ -27,12 +32,13 @@ export class CartService {
     );
     if (productIndex !== -1) {
       this.cartProducts.splice(productIndex, 1, updatedProduct);
+
       localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
       localStorage.setItem(
         'productCount',
         JSON.stringify(this.productCount.getValue())
       );
-
+      this.updateTotal();
       console.log('Количество товара обновлено!');
     } else {
       console.log('Этого товара нет в корзине!');
@@ -49,16 +55,19 @@ export class CartService {
     const idExists = this.cartProducts.every((item) => item.id !== product.id);
     if (idExists) {
       this.cartProducts.push(product);
+
       this.productCount.next(this.cartProducts.length);
       localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
       localStorage.setItem(
         'productCount',
         JSON.stringify(this.productCount.getValue())
       );
-
-      console.log('Товар добавлен в корзину!');
+      this.updateTotal();
+      this.alertService.success('Товар добавлен в корзину');
+      //console.log('Товар добавлен в корзину!');
     } else {
-      console.log('Этот товар уже есть в корзине!');
+      this.alertService.warning('Этот товар уже есть в корзине!');
+      //console.log('Этот товар уже есть в корзине!');
       return;
     }
   }
@@ -71,17 +80,37 @@ export class CartService {
     if (productIndex !== -1) {
       this.cartProducts.splice(productIndex, 1);
       this.productCount.next(this.cartProducts.length);
+
       localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
       localStorage.setItem(
         'productCount',
         JSON.stringify(this.productCount.getValue())
       );
-
-      console.log('Товар удален из корзины!');
+      this.updateTotal();
+      this.alertService.danger('Товар удален из корзины!');
+      //console.log('Товар удален из корзины!');
     } else {
       console.log('Этого товара нет в корзине!');
       return;
     }
+  }
+
+  updateTotal() {
+    const totalPrice = this.cartProducts.reduce(
+      //@ts-ignore
+      (total, product) => total + product.quantity * product.price,
+      0
+    );
+    // Обновляем значение totalPrice в BehaviorSubject
+    this.totalPrice$.next(totalPrice);
+    //Считаем общее количество товаров в корзине
+    const totalQuantity = this.cartProducts.reduce(
+      //@ts-ignore
+      (total, product) => total + product.quantity,
+      0
+    );
+    // Обновляем значение totalPrice в BehaviorSubject
+    this.totalQuantity$.next(totalQuantity);
   }
 
   getProductCount() {

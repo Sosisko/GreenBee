@@ -8,6 +8,7 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
+import { AlertService } from '../services/alert.service';
 
 @Component({
   selector: 'app-product-page',
@@ -35,7 +36,10 @@ export class ProductPageComponent {
   @Input() product!: Product;
   visible: boolean = true;
   quantity: number = 1;
-  constructor(private cartService: CartService) {}
+
+
+
+  constructor(private cartService: CartService, private alertService: AlertService) {}
 
   onAddToCart(product: Product) {
     product.quantity = this.quantity;

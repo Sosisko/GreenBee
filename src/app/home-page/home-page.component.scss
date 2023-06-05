@@ -28,7 +28,7 @@ p {
 }
 .products-list {
   display: flex;
-  justify-content: space-between;
+  //justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 20px;
@@ -55,39 +55,74 @@ p {
   justify-content: center;
   gap: 60px;
   border-bottom: 1px solid #eee;
+  padding-left: 0;
 
   li {
     text-align: center;
-    a {
-      filter: grayscale(1);
-      cursor: pointer;
-      padding: 5px;
-
+    position: relative;
+    filter: grayscale(1);
+    cursor: pointer;
+    padding: 5px 0 15px 0;
+    .title-cate {
+      color: #666;
+      padding-top: 13px;
+      font-family: "Poppins", sans-serif;
+    }
+    &.active {
+      filter: grayscale(0);
       .title-cate {
-        color: #666;
-        padding-top: 13px;
-        font-family: "Poppins", sans-serif;
+        color: #78b144;
       }
-      &:hover {
-        filter: grayscale(0);
-        .title-cate {
-          color: #78b144;
-        }
+    }
+    &:hover {
+      filter: grayscale(0);
+      .title-cate {
+        color: #78b144;
       }
-      &.active {
-        filter: grayscale(0);
-        .title-cate {
-          color: #78b144;
-        }
-      }
+    }
+    &:hover::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 3px;
+      background: #78b144;
+      left: 0;
+      bottom: -2px;
+    }
+
+    &.active::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 3px;
+      background: #78b144;
+      left: 0;
+      bottom: -2px;
     }
   }
 }
-
 .img-cate {
   min-height: 36px;
   img {
     vertical-align: middle;
     max-width: 32px;
   }
+}
+
+.pagination {
+  text-align: center;
+}
+
+.pagination ::ng-deep .ngx-pagination li.ng-star-inserted{
+  margin-right: 10px;
+}
+
+.pagination ::ng-deep .ngx-pagination a {
+  border-radius: 5px;
+}
+
+.pagination ::ng-deep .ngx-pagination .current {
+  background: #0d7a52;
+  border-radius: 5px;
+  margin-right: 10px;
 }
