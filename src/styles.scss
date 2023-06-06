@@ -29,6 +29,8 @@ a {
 }
 
 .ql-editor > * {
-  cursor: auto;
+  cursor: pointer;
 }
-
+.mat-mdc-dialog-container {
+  --mdc-dialog-container-color: #fff;
+}

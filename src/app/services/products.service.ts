@@ -8,11 +8,22 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ProductsService {
-
-
 category!: string
 
   constructor(private http: HttpClient) { }
+
+  getAll() {
+    return this.http.get(`${environment.fbDbUrl}/products.json`)
+    .pipe(map((response: {[key: string]:any} ) => {
+      return Object.keys(response).map(key => (
+        {
+          ...response[key],
+          id: key,
+          date: new Date(response[key].date)
+        }
+        ))
+    }))
+  }
 
   addProduct(product: Product): Observable<Product> {
     return this.http.post(`${environment.fbDbUrl}/products.json` , product)
@@ -26,28 +37,21 @@ category!: string
     }))
   }
 
-  getAll() {
-    return this.http.get(`${environment.fbDbUrl}/products.json`)
-    .pipe(map((response: {[key: string]:any}) => {
-      return Object.keys(response).map(key => (
-        {
-          ...response[key],
-          id: key,
-          date: new Date(response[key].date)
-        }
-        ))
-    }))
-  }
+
 
   getById(id:string) {
     return this.http.get(`${environment.fbDbUrl}/products/${id}.json`)
     //@ts-ignore //странная ошибка ts
     .pipe(map((response: Product) => {
-      return {
+      if(response) {
+           return {
         ...response,
         id,
         date: new Date(response.date)
       }
+      
+      } 
+      return response
     }))
   }
   

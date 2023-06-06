@@ -24,7 +24,10 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { AlertComponent } from './shared/alert/alert.component';
 import { AlertService } from './services/alert.service';
 import { CartPagePrewievComponent } from './cart-page-prewiev/cart-page-prewiev.component';
-import {NgxPaginationModule} from 'ngx-pagination'; 
+import { NgxPaginationModule } from 'ngx-pagination';
+import { DialogOfProductComponent } from './shared/dialog-of-product/dialog-of-product.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
 
 registerLocaleData(localeRu, 'ru');
 @NgModule({
@@ -39,6 +42,7 @@ registerLocaleData(localeRu, 'ru');
     ProductComponent,
     AlertComponent,
     CartPagePrewievComponent,
+    DialogOfProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,6 +56,8 @@ registerLocaleData(localeRu, 'ru');
     FontAwesomeModule,
     MatGridListModule,
     NgxPaginationModule,
+    MatDialogModule,
+    MatButtonModule,
     QuillModule.forRoot(),
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'ru' }, AlertService],

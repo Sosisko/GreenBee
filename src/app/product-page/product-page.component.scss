@@ -1,5 +1,10 @@
+a{
+  cursor: pointer;
+}
+
 .image {
   position: relative;
+
 }
 .btn-group {
   position: absolute;
@@ -13,7 +18,7 @@
     background: #fff;
     border-radius: 100%;
     box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15);
-    border:none;
+    border: none;
     font-size: 0;
     width: 40px;
     height: 40px;

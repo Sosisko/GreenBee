@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
 import { Product } from '../models/interfaces';
 import { CartService } from '../services/cart.service';
+
 import {
   animate,
   state,
@@ -8,12 +9,16 @@ import {
   transition,
   trigger,
 } from '@angular/animations';
-import { AlertService } from '../services/alert.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { ProductComponent } from '../product/product.component';
+import { DialogOfProductComponent } from '../shared/dialog-of-product/dialog-of-product.component';
+
 
 @Component({
   selector: 'app-product-page',
   templateUrl: './product-page.component.html',
   styleUrls: ['./product-page.component.scss'],
+
   animations: [
     trigger('btnOne', [
       state('start', style({ opacity: 0, transform: 'translateY(-40px)' })),
@@ -38,12 +43,18 @@ export class ProductPageComponent {
   quantity: number = 1;
 
 
-
-  constructor(private cartService: CartService, private alertService: AlertService) {}
-
+  constructor(private cartService: CartService, public dialog: MatDialog) {}
   onAddToCart(product: Product) {
     product.quantity = this.quantity;
     this.cartService.addProductToCart(product);
     this.quantity = 1;
   }
+
+  openDialog(product: any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = product; // передаем product в data
+    this.dialog.open(DialogOfProductComponent, dialogConfig);
+    console.log(dialogConfig);
+  }
+
 }

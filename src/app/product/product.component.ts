@@ -28,7 +28,6 @@ export class ProductComponent implements OnInit {
     );
   }
 
-
   decreaseQuantity() {
     if (this.quantity !== undefined && this.quantity > 1) {
       this.quantity--;
@@ -39,7 +38,6 @@ export class ProductComponent implements OnInit {
   increaseQuantity() {
     if (this.quantity !== undefined) {
       this.quantity++;
-
     }
   }
 
