@@ -2,6 +2,8 @@ import { Injectable, OnInit } from '@angular/core';
 import { Product } from '../models/interfaces';
 import { BehaviorSubject } from 'rxjs';
 import { AlertService } from './alert.service';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
+import { DialogAddCartComponent } from '../shared/dialog-add-cart/dialog-add-cart.component';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +17,7 @@ export class CartService implements OnInit {
   totalPrice$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
   totalQuantity$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
-  constructor(private alertService: AlertService) {
+  constructor(private alertService: AlertService, public dialog: MatDialog) {
     const productCount = JSON.parse(
       localStorage.getItem('productCount') || '0'
     );
@@ -46,6 +48,19 @@ export class CartService implements OnInit {
     }
   }
 
+  openDialog(product: any) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.data = {
+      product: product,
+      totalQuantity$: this.totalQuantity$,
+      totalPrice$: this.totalPrice$
+    }; // передаем product в data
+
+    dialogConfig.width = '600px';
+    this.dialog.open(DialogAddCartComponent, dialogConfig);
+    //console.log(dialogConfig);
+  }
+
   // //Метод every будет проверять каждый элемент массива и вернет true,
   // // если все элементы не соответствуют условию в колбэке, и false - если найден элемент,
   // // у которого совпадает id. Таким образом, если idExists равно true,
@@ -63,6 +78,7 @@ export class CartService implements OnInit {
         JSON.stringify(this.productCount.getValue())
       );
       this.updateTotal();
+      this.openDialog(product); //Диалоговое окно с сообщением, что товар добавлен
       this.alertService.success('Товар добавлен в корзину');
       //console.log('Товар добавлен в корзину!');
     } else {

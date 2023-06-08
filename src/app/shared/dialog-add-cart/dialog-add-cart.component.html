@@ -1,0 +1,40 @@
+<div *ngIf="data">
+  <div class="header">
+    <mat-icon>check_circle</mat-icon>
+    <h1>Продукт успешно добавлен в вашу корзину</h1>
+    <button mat-dialog-close class="btn-back" routerLink="/">x</button>
+  </div>
+
+  <div class="content-info">
+    <div class="left-side">
+      <quill-view-html
+        class="img"
+        [content]="data.product.image"
+      ></quill-view-html>
+      <div class="left-side-info">
+        <h3>{{ data.product.title }}</h3>
+        <b>{{ data.product.price | currency }}</b>
+        <span>Quantity:{{ data.product.quantity }}</span>
+      </div>
+    </div>
+    <div class="right-side">
+      <p>
+        There are
+        <span class="total-quantity">{{ data.totalQuantity$ | async }}</span>
+        items in your cart.
+      </p>
+      <p class="total-price-products">
+        Total products: <b>{{ data.totalPrice$ | async | currency }}</b>
+      </p>
+      <p class="total-shipping">Total shipping: Free</p>
+      <p class="total-price">
+        Total: <b>{{ data.totalPrice$ | async | currency }}</b> (tax incl.)
+      </p>
+    </div>
+  </div>
+  <div class="btn-wrap">
+    <button routerLink="/" mat-dialog-close class="btn-to-shop">
+      Вернуться к покупкам
+    </button>
+  </div>
+</div>

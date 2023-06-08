@@ -10,7 +10,6 @@ import {
   trigger,
 } from '@angular/animations';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { ProductComponent } from '../product/product.component';
 import { DialogOfProductComponent } from '../shared/dialog-of-product/dialog-of-product.component';
 
 

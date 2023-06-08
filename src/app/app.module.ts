@@ -28,6 +28,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { DialogOfProductComponent } from './shared/dialog-of-product/dialog-of-product.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
+import { DialogAddCartComponent } from './shared/dialog-add-cart/dialog-add-cart.component';
 
 registerLocaleData(localeRu, 'ru');
 @NgModule({
@@ -43,6 +44,7 @@ registerLocaleData(localeRu, 'ru');
     AlertComponent,
     CartPagePrewievComponent,
     DialogOfProductComponent,
+    DialogAddCartComponent,
   ],
   imports: [
     BrowserModule,
