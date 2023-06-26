@@ -25,6 +25,8 @@ category!: string
     }))
   }
 
+  
+
   addProduct(product: Product): Observable<Product> {
     return this.http.post(`${environment.fbDbUrl}/products.json` , product)
     //@ts-ignore //странная ошибка ts

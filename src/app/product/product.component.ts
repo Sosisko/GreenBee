@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
 import { Product } from '../models/interfaces';
 import { CartService } from './../services/cart.service';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-product',
@@ -12,7 +13,11 @@ import { CartService } from './../services/cart.service';
 })
 export class ProductComponent implements OnInit {
   product$!: Observable<any>;
-  quantity:number = 1
+  quantity: number = 1;
+
+  selectedOption = ''
+
+  price  = 0
 
   constructor(
     private productsService: ProductsService,
@@ -28,10 +33,15 @@ export class ProductComponent implements OnInit {
     );
   }
 
+  onChange(option: any) {
+    console.log(option.price);
+    this.price = option.price
+
+  }
+
   decreaseQuantity() {
     if (this.quantity !== undefined && this.quantity > 1) {
       this.quantity--;
-
     }
   }
 
@@ -43,7 +53,9 @@ export class ProductComponent implements OnInit {
 
   addProduct(product: Product) {
     product.quantity = this.quantity;
-    this.cartService.addProductToCart(product)
+    this.cartService.addProductToCart(product);
     this.quantity = 1;
   }
+
+
 }

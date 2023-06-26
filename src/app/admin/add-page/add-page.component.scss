@@ -55,3 +55,26 @@ form {
       border: 1px dashed gray;
       cursor: no-drop;
   }
+
+  .measure-option-wrapper{
+    border: 1px dashed gray;
+    margin-top: 30px;
+    padding: 20px;
+    label {
+      margin-right: 10px;
+    }
+    input {
+      display: inline;
+      text-align: center;
+      width: 100px;
+      padding: 2px;
+      border-color: black;
+
+    }
+    .measure-content, .measure-price-content{
+      max-width: 50%;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+  }

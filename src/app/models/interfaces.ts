@@ -18,6 +18,8 @@ export interface User {
     category: string
     date: Date
     quantity?: number
+    measure?: any
+    option?: any
   }
 
 

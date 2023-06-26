@@ -9,23 +9,6 @@ import { Subscription } from 'rxjs';
   templateUrl: './products-collection-page.component.html',
   styleUrls: ['./products-collection-page.component.scss'],
 })
-export class ProductsCollectionPageComponent implements OnInit, OnDestroy {
-  products!: Product[];
-  pSub!: Subscription;
-
-  p: number = 1;
-  collection: any[] = this.products;  
-
-  constructor(private productsService: ProductsService) {}
-  ngOnInit() {
-    this.pSub = this.productsService.getAll().subscribe((product) => {
-      this.products = product;
-    });
-  }
-
-  ngOnDestroy() {
-    if (this.pSub) {
-      this.pSub.unsubscribe();
-    }
-  }
+export class ProductsCollectionPageComponent {
+  
 }

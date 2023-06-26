@@ -29,6 +29,22 @@
         <div class="price">
           <span>{{ product.price | currency }}</span>
         </div>
+
+        <div *ngIf="product.option; else nonOption">ЕСТЬ ОПЦИИ!</div>
+        <ng-template #nonOption>НЕТ ОПЦИЙ!</ng-template>
+
+        <ul>
+          <li *ngFor="let option of product.option">
+            <input
+              type="radio"
+              [(ngModel)]="selectedOption"
+              [value]="option.measureQantity"
+              (change)="onChange(option)"
+            />{{ option.measureQantity }}
+          </li>
+          <p>{{ price }}</p>
+        </ul>
+
         <div class="product-add-to-cart">
           <div class="product-quantity">
             <div class="input-group">
