@@ -57,9 +57,27 @@ form {
   }
 
   .measure-option-wrapper{
+    display: flex;
     border: 1px dashed gray;
     margin-top: 30px;
-    padding: 20px;
+
+    .measure-left-side, .measure-right-side {
+      max-width: 50%;
+      padding: 20px;
+    }
+
+.array-of-options{
+  position: relative;
+  padding: 10px;
+  border: 1px solid gray;
+  margin-bottom: 10px;
+  button {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+
     label {
       margin-right: 10px;
     }
@@ -72,7 +90,6 @@ form {
 
     }
     .measure-content, .measure-price-content{
-      max-width: 50%;
       display: flex;
       justify-content: space-between;
       margin-bottom: 20px;

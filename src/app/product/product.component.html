@@ -27,22 +27,24 @@
           <p>{{ product.description }}</p>
         </div>
         <div class="price">
-          <span>{{ product.price | currency }}</span>
+          <span>{{ measurePrice | currency }}</span>
         </div>
 
-        <div *ngIf="product.option; else nonOption">ЕСТЬ ОПЦИИ!</div>
+        <div *ngIf="product.options; else nonOption">ЕСТЬ ОПЦИИ!</div>
         <ng-template #nonOption>НЕТ ОПЦИЙ!</ng-template>
 
-        <ul>
-          <li *ngFor="let option of product.option">
-            <input
-              type="radio"
-              [(ngModel)]="selectedOption"
-              [value]="option.measureQantity"
-              (change)="onChange(option)"
-            />{{ option.measureQantity }}
+        <ul class="option-wrapper">
+          <li *ngFor="let option of product.options">
+            <div class="input-options">
+              <input
+                type="radio"
+                [(ngModel)]="selectedOption"
+                [value]="option.measureQantity"
+                (change)="onChange(option)"
+              />
+            </div>
+            <p class="option-quantity">{{option.measureQantity}}<span>{{option.measureValue}}</span></p>
           </li>
-          <p>{{ price }}</p>
         </ul>
 
         <div class="product-add-to-cart">

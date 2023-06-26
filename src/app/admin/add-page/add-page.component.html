@@ -16,7 +16,7 @@
   </div>
 
   <div class="form-control">
-    <label for="type">Фото:</label>
+    <p>Фото:</p>
     <quill-editor formControlName="image"></quill-editor>
   </div>
   <div
@@ -45,7 +45,7 @@
     }"
   >
     <label for="category">Категория:</label>
-    <select formControlName="category">
+    <select id="category" formControlName="category">
       <option value="Fruits">Fruits</option>
       <option value="Vegetable">Vegetable</option>
       <option value="Juices">Juices</option>
@@ -63,7 +63,13 @@
     }"
   >
     <label for="price">Цена:</label>
-    <input id="price" type="number" formControlName="price"  min="0" (change)="checkValue($event)"/>
+    <input
+      id="price"
+      type="number"
+      formControlName="price"
+      min="0"
+      (change)="checkValue($event)"
+    />
     <div *ngIf="form.get('price')?.touched && form.get('price')?.invalid">
       <small *ngIf="form.get('price')?.errors?.['required']"
         >Вам нужно установить цену</small
@@ -71,26 +77,45 @@
     </div>
 
     <div class="measure-option-wrapper">
-      <div class="measure-content">
-        <label for="measureValue">Мера:</label>
-        <select formControlName="measureValue">
-          <option value="Kg">Kg</option>
-          <option value="L">Liter</option>
-        </select>
-        <select  formControlName="measureQantity">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="5">5</option>
-          <option value="10">10</option>
-          <option value="20">20</option>
-      </select>
+      <div class="measure-left-side">
+        <div class="measure-content">
+          <label for="measureValue">Мера:</label>
+          <select id="measureValue" formControlName="measureValue">
+            <option value="Kg">Kg</option>
+            <option value="L">Liter</option>
+          </select>
+          <select formControlName="measureQantity">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="20">20</option>
+          </select>
+        </div>
+        <div class="measure-price-content">
+          <label for="measurePrice">Цена за ед.:</label>
+          <input
+            id="measurePrice"
+            type="number"
+            formControlName="measurePrice"
+            min="1"
+            (change)="checkValue($event)"
+          />
+        </div>
+        <button type="button" (click)="addOption()">Добавить опцию</button>
+        <button type="button" (click)="clearOption()">Очистить</button>
       </div>
-      <div class="measure-price-content">
-        <label for="measurePrice">Цена за ед.:</label>
-        <input id="measurePrice" type="number" formControlName="measurePrice" min="1" (change)="checkValue($event)"/>
+      <div class="measure-right-side">
+        Добавленные опции:
+        <div class="array-of-options" *ngFor="let option of options">
+          <button (click)="delOption(option)">x</button>
+          <div>
+            Ед. изм.: {{ option.measureQantity }}
+            <span>{{ option.measureValue }}</span>
+          </div>
+          <div>Цена: <span>{{ option.measurePrice | currency}}</span></div>
+        </div>
       </div>
-      <button type="button" (click)="addOption()">Добавить опцию</button>
-      <button type="button" (click)="clearOption()">Очистить</button>
     </div>
   </div>
   <button type="submit" [disabled]="form.invalid || submitted">

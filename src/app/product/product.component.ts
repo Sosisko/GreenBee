@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../services/products.service';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, switchMap } from 'rxjs';
-import { Product } from '../models/interfaces';
+import { Observable, map, switchMap } from 'rxjs';
+import { CartProduct, Product } from '../models/interfaces';
 import { CartService } from './../services/cart.service';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-product',
@@ -14,10 +13,8 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 export class ProductComponent implements OnInit {
   product$!: Observable<any>;
   quantity: number = 1;
-
-  selectedOption = ''
-
-  price  = 0
+  selectedOption: any;
+  measurePrice = null
 
   constructor(
     private productsService: ProductsService,
@@ -31,12 +28,24 @@ export class ProductComponent implements OnInit {
         return this.productsService.getById(params['id']);
       })
     );
+    //Таким образом, при получении данных о продукте из сервиса,
+    //переменная "selectedOption" будет установлена равной значению
+    //первого элемента массива "product.option", а также переменная "price"
+    //будет установлена равной цене первого элемента массива "product.option".
+    //Это позволит активировать первый инпут по умолчанию и отображать соответствующую цену.
+    this.product$.subscribe((product) => {
+      if (product.options) {
+        this.selectedOption = product.options[0].measureQantity;
+        this.measurePrice = product.options[0].measurePrice;
+      }
+    });
+
   }
 
   onChange(option: any) {
-    console.log(option.price);
-    this.price = option.price
-
+    this.measurePrice = option.measurePrice;
+    console.log(option);
+    
   }
 
   decreaseQuantity() {
@@ -51,11 +60,24 @@ export class ProductComponent implements OnInit {
     }
   }
 
+  // addProduct(product: Product) {
+  //   product.quantity = this.quantity;
+  //   this.cartService.addProductToCart(product);
+  //   this.quantity = 1;
+  //   console.log(product);
+  // }
+
+
+  //Создается новый объект cartProduct, который содержит все свойства продукта, 
+  //а также выбранную цену this.measurePrice и количество this.quantity. 
+  //Затем этот объект передается в метод addProductToCart сервиса корзины.
   addProduct(product: Product) {
-    product.quantity = this.quantity;
-    this.cartService.addProductToCart(product);
+    const cartProduct: any = {
+      ...product,
+      price: this.measurePrice,
+      quantity: this.quantity
+    };
+    this.cartService.addProductToCart(cartProduct);
     this.quantity = 1;
   }
-
-
 }

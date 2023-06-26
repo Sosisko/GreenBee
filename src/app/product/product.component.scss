@@ -170,3 +170,43 @@ input[type="number"]:focus {
     background: #78b144;
   }
 }
+input[type="radio"] {
+  cursor: pointer;
+  appearance: none;
+  border: 1px solid #ebebeb;
+  padding: 0 7px;
+  width: 34px;
+  height: 34px;
+  outline: none;
+  border-width: 1px;
+  border-radius: 3px;
+}
+
+input[type="radio"]:hover {
+  border-color: #000;
+  border-width: 3px;
+}
+input[type="radio"]:checked{
+  border-color: #000;
+  border-width: 3px;
+}
+
+
+.input-options {
+  position: absolute;
+  top: -7px;
+}
+.option-quantity {
+  font-size: 10px;
+}
+.option-wrapper {
+  position: relative;
+  padding-left: 0;
+  display: flex;
+  gap: 10px;
+  li {
+    width: 34px;
+    height: 34px;
+    text-align: center;
+  }
+}
