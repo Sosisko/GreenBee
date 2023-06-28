@@ -55,3 +55,43 @@ form {
       border: 1px dashed gray;
       cursor: no-drop;
   }
+
+  .measure-option-wrapper{
+    display: flex;
+    border: 1px dashed gray;
+    margin-top: 30px;
+
+    .measure-left-side, .measure-right-side {
+      max-width: 50%;
+      padding: 20px;
+    }
+
+.array-of-options{
+  position: relative;
+  padding: 10px;
+  border: 1px solid gray;
+  margin-bottom: 10px;
+  button {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+
+    label {
+      margin-right: 10px;
+    }
+    input {
+      display: inline;
+      text-align: center;
+      width: 100px;
+      padding: 2px;
+      border-color: black;
+
+    }
+    .measure-content, .measure-price-content{
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+  }

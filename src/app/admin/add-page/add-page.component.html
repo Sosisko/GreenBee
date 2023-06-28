@@ -67,7 +67,6 @@
       id="price"
       type="number"
       formControlName="price"
-      min="0"
       (change)="checkValue($event)"
     />
     <div *ngIf="form.get('price')?.touched && form.get('price')?.invalid">
@@ -98,7 +97,6 @@
             id="measurePrice"
             type="number"
             formControlName="measurePrice"
-            min="1"
             (change)="checkValue($event)"
           />
         </div>

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsService } from '../services/products.service';
 import { ActivatedRoute } from '@angular/router';
-import { Observable, map, switchMap } from 'rxjs';
-import { CartProduct, Product } from '../models/interfaces';
+import { Observable, switchMap } from 'rxjs';
+import { Product } from '../models/interfaces';
 import { CartService } from './../services/cart.service';
 
 @Component({
@@ -38,14 +38,13 @@ export class ProductComponent implements OnInit {
         this.selectedOption = product.options[0].measureQantity;
         this.measurePrice = product.options[0].measurePrice;
       }
+      console.log(product.price);
     });
-
   }
 
   onChange(option: any) {
     this.measurePrice = option.measurePrice;
     console.log(option);
-    
   }
 
   decreaseQuantity() {
@@ -60,13 +59,6 @@ export class ProductComponent implements OnInit {
     }
   }
 
-  // addProduct(product: Product) {
-  //   product.quantity = this.quantity;
-  //   this.cartService.addProductToCart(product);
-  //   this.quantity = 1;
-  //   console.log(product);
-  // }
-
 
   //Создается новый объект cartProduct, который содержит все свойства продукта, 
   //а также выбранную цену this.measurePrice и количество this.quantity. 
@@ -74,7 +66,7 @@ export class ProductComponent implements OnInit {
   addProduct(product: Product) {
     const cartProduct: any = {
       ...product,
-      price: this.measurePrice,
+      price: this.measurePrice ? this.measurePrice : product.price,
       quantity: this.quantity
     };
     this.cartService.addProductToCart(cartProduct);

@@ -27,7 +27,8 @@
           <p>{{ product.description }}</p>
         </div>
         <div class="price">
-          <span>{{ measurePrice | currency }}</span>
+          <span *ngIf="measurePrice; else productPrice">{{ measurePrice | currency }}</span>
+          <ng-template #productPrice> <span>{{ product.price | currency }}</span></ng-template>
         </div>
 
         <div *ngIf="product.options; else nonOption">ЕСТЬ ОПЦИИ!</div>

@@ -19,8 +19,8 @@ export class AddPageComponent implements OnInit {
 
   //Если ввести отрицательное число, оно автоматически заменяется на 1
   checkValue(event: any) {
-    if (event.target.value < 1) {
-      event.target.value = 1;
+    if (event.target.value < 0) {
+      event.target.value = 0;
     }
   }
 
@@ -29,7 +29,7 @@ export class AddPageComponent implements OnInit {
       title: new FormControl(null, Validators.required),
       image: new FormControl(null, Validators.required),
       description: new FormControl(null, Validators.required),
-      price: new FormControl(null),
+      price: new FormControl(null, Validators.required),
       category: new FormControl(null, Validators.required),
       measureValue: new FormControl(null),
       measureQantity: new FormControl(null),
