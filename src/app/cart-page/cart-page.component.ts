@@ -42,7 +42,6 @@ export class CartPageComponent implements OnInit, OnDestroy {
     this.cartProducts = this.cartService.cartProducts;
     console.log(this.cartProducts);
     this.updateTotal();
-    console.log(this.totalPrice);
   }
 
   updateTotal() {

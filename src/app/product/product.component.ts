@@ -38,7 +38,6 @@ export class ProductComponent implements OnInit {
         this.selectedOption = product.options[0].measureQantity;
         this.measurePrice = product.options[0].measurePrice;
       }
-      console.log(product.price);
     });
   }
 
@@ -60,9 +59,9 @@ export class ProductComponent implements OnInit {
   }
 
 
-  //Создается новый объект cartProduct, который содержит все свойства продукта, 
-  //а также выбранную цену this.measurePrice и количество this.quantity. 
-  //Затем этот объект передается в метод addProductToCart сервиса корзины.
+  // Создается новый объект cartProduct, который содержит все свойства продукта, 
+  // а также выбранную цену this.measurePrice и количество this.quantity. 
+  // Затем этот объект передается в метод addProductToCart сервиса корзины.
   addProduct(product: Product) {
     const cartProduct: any = {
       ...product,
@@ -72,4 +71,29 @@ export class ProductComponent implements OnInit {
     this.cartService.addProductToCart(cartProduct);
     this.quantity = 1;
   }
+
+  // addProduct(product: Product) {
+  //   if (this.selectedOption) {
+  //     const selectedOption = product.options.find((option:any) => option.measureQuantitiy === this.selectedOption);
+  //     if (!selectedOption) {
+  //       const cartProduct: any = {
+  //         ...product,
+  //         price: selectedOption.measurePrice,
+  //         quantity: this.quantity,
+  //         options: [selectedOption]
+  //       };
+  //       console.log(cartProduct);
+  //       this.cartService.addProductToCart(cartProduct);
+  //     }
+     
+  //   } else {
+  //     const cartProduct: any = {
+  //       ...product,
+  //       price: this.measurePrice ? this.measurePrice : product.price,
+  //       quantity: this.quantity
+  //     };
+  //     this.cartService.addProductToCart(cartProduct);
+  //   }
+  //   this.quantity = 1;
+  // }
 }

@@ -67,10 +67,11 @@ export class CartService implements OnInit {
   // // значит продукта с таким же id в массиве нет и можно добавлять новый,
   // // иначе выведется сообщение "Этот товар уже есть в корзине!".
   addProductToCart(product: Product) {
-    const idExists = this.cartProducts.every((item) => item.id !== product.id);
+    const idExists = this.cartProducts.every((item) => item.options.measureQantity !== product.options.measureQantity);
+    
+    //const idExists = this.cartProducts.every((item) => item.id !== product.id);
     if (idExists) {
       this.cartProducts.push(product);
-
       this.productCount.next(this.cartProducts.length);
       localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
       localStorage.setItem(
