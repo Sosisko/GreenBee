@@ -15,6 +15,7 @@ import { AuthGuard } from '../services/auth.guard';
 import { ProductsService } from '../services/products.service';
 import { QuillModule } from 'ngx-quill';
 import { PipesModule } from '../pipes/pipes.module';
+import { AlertComponent } from '../shared/alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { PipesModule } from '../pipes/pipes.module';
   providers: [AuthService, AuthGuard, ProductsService],
   exports: [],
   imports: [
+    AlertComponent,
     CommonModule,
     FormsModule,
     ReactiveFormsModule,

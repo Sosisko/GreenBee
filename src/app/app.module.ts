@@ -41,12 +41,13 @@ registerLocaleData(localeRu, 'ru');
     ProductPageComponent,
     ProductsCollectionPageComponent,
     ProductComponent,
-    AlertComponent,
     CartPagePrewievComponent,
     DialogOfProductComponent,
     DialogAddCartComponent,
   ],
+
   imports: [
+    AlertComponent,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -62,7 +63,7 @@ registerLocaleData(localeRu, 'ru');
     MatButtonModule,
     QuillModule.forRoot(),
   ],
-  providers: [{ provide: LOCALE_ID, useValue: 'ru' }, AlertService],
+  providers: [{ provide: LOCALE_ID, useValue: 'ru' }],
   bootstrap: [AppComponent],
   exports: [],
 })

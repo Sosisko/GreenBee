@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Product } from 'src/app/models/interfaces';
+import { AlertService } from 'src/app/services/alert.service';
 import { ProductsService } from 'src/app/services/products.service';
 
 @Component({
@@ -15,7 +16,7 @@ export class AddPageComponent implements OnInit {
 
   options: any = [];
 
-  constructor(private productsService: ProductsService) {}
+  constructor(private productsService: ProductsService, private alertService: AlertService) {}
 
   //Если ввести отрицательное число, оно автоматически заменяется на 1
   checkValue(event: any) {
@@ -39,29 +40,45 @@ export class AddPageComponent implements OnInit {
 
   //Добавляем дополнительные параметры в продукт (мера, цена)
   addOption() {
-    if (
-      this.form.value.measureValue &&
-      this.form.value.measureQantity &&
-      this.form.value.measurePrice > 0
-    ) {
-      this.options.push({
-        measureValue: this.form.value.measureValue,
-        measureQantity: this.form.value.measureQantity,
-        measurePrice: this.form.value.measurePrice,
-      });
-      console.log(this.options);
+    //Проверяем, если в массиве уже есть одна мера (Кг или Литры), то не даём добавить разные меры
+    const measureValue = this.form.value.measureValue;
+    const measureValueExists = this.options.some(
+      (option: any) => option.measureValue !== measureValue
+    );
+
+    //Проверяем, если в масиве уже есть количество меры, то не даём добавить одинаковые значения меры
+    const measureQantity = this.form.value.measureQantity;
+    const measureQantityExists = this.options.some(
+      (option: any) => option.measureQantity === measureQantity
+    );
+
+    if (measureValue && this.form.value.measurePrice > 0) {
+      if (!measureQantityExists && !measureValueExists) {
+        this.options.push({
+          measureValue: this.form.value.measureValue,
+          measureQantity: this.form.value.measureQantity,
+          measurePrice: this.form.value.measurePrice,
+        });
+        this.alertService.success('Опция добавлена');
+      } else if (measureValueExists) {
+        this.alertService.warning('Вы можете выбрать только один тип меры');
+      } else if (measureQantityExists) {
+        this.alertService.warning('Опция с таким параметром уже существует, выберите другой вес или объём');
+       
+      }
     } else {
-      this.options = [];
-      console.log('Введите корректные данные');
+      this.alertService.success('Введите все данные');
     }
   }
   //Удаляет опции
-  delOption(option:any) {
+  delOption(option: any) {
     const optionIndex = this.options.findIndex(
-      (item:any) => item.id === option.id
+      (item: any) => item.id === option.id
     );
     if (optionIndex !== -1) {
       this.options.splice(optionIndex, 1);
+      this.alertService.danger('Опция удалена');
+      
     }
     console.log(this.options);
   }
@@ -85,7 +102,10 @@ export class AddPageComponent implements OnInit {
       title: this.form.value.title,
       image: this.form.value.image,
       description: this.form.value.description,
-      price: this.options.length > 0 ? this.options[0].measurePrice : this.form.value.price,
+      price:
+        this.options.length > 0
+          ? this.options[0].measurePrice
+          : this.form.value.price,
       category: this.form.value.category,
       options: this.options,
       date: new Date(),
