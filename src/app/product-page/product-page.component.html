@@ -6,7 +6,6 @@
     ></quill-view-html
   ></a>
   <div class="btn-group">
-    <!-- <button [@btnOne]="btnState" [routerLink]="['/product', product.id]"> -->
     <button [@btnOne]="btnState" (click)="openDialog(product)">
       <mat-icon>search</mat-icon>
     </button>
@@ -18,8 +17,15 @@
 </div>
 <div class="product-price">{{ product.price | currency }}</div>
 
-<button class="btn-add-cart" (click)="onAddToCart(product)">
-  <mat-icon fontIcon="local_mall"></mat-icon>
-  <span>Добавить в корзину</span>
-</button>
-
+<div *ngIf="product.options; else whithoutOptions">
+  <button class="btn-add-cart" (click)="openDialog(product)">
+    <mat-icon fontIcon="done"></mat-icon>
+    <span>Выбрать опции</span>
+  </button>
+</div>
+<ng-template #whithoutOptions>
+  <button class="btn-add-cart" (click)="onAddToCart(product)">
+    <mat-icon fontIcon="local_mall"></mat-icon>
+    <span>Добавить в корзину</span>
+  </button>
+</ng-template>

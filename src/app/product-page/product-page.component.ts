@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Product } from '../models/interfaces';
 import { CartService } from '../services/cart.service';
 
@@ -43,6 +43,8 @@ export class ProductPageComponent {
 
 
   constructor(private cartService: CartService, public dialog: MatDialog) {}
+
+
   onAddToCart(product: Product) {
     product.quantity = this.quantity;
     this.cartService.addProductToCart(product);
