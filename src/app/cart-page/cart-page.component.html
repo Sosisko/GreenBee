@@ -36,14 +36,14 @@
         <div class="product-title">
           <mat-grid-tile colspan="1"
             >{{ product.title }}
-            <span
-              >{{ product.options ? "(" +product.options.measureQantity+product.options.measureValue + ")" : null}}</span
-            ></mat-grid-tile
+            </mat-grid-tile
           >
         </div>
 
         <mat-grid-tile colspan="2"
-          ><b> {{ product.price | currency }}</b></mat-grid-tile
+          ><b> {{ product.price | currency }}<span class="product-measure-qantity"
+            >{{ product.options ? "(" +product.options.measureQantity+product.options.measureValue + ")" : null}}</span
+          ></b></mat-grid-tile
         >
         <mat-grid-tile colspan="2" class="quantity">
           <div class="input-group">

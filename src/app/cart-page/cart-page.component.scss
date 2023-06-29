@@ -175,12 +175,14 @@ input[type="number"]:focus {
 }
 
 .product-title {
+  // white-space: pre-wrap;
+  // word-wrap:break-word;
   word-break: break-all;
   text-align: center;
-  span {
-    margin-left: 5px;
-    font-size: 11px;
-    color: #909090;
-    font-weight: 500;
-  }
+}
+.product-measure-qantity {
+  margin-left: 5px;
+  font-size: 11px;
+  color: #909090;
+  font-weight: 500;
 }
