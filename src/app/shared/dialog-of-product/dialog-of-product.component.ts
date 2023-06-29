@@ -13,7 +13,8 @@ import { Inject } from '@angular/core';
 export class DialogOfProductComponent {
   //product:any
   quantity: number = 1;
-  selectedOption: any;
+  measureQantity: any;
+  selectedOptions: any;
   measurePrice = null;
 
   constructor(
@@ -23,14 +24,19 @@ export class DialogOfProductComponent {
 
   ngOnInit() {
     if (this.product.options) {
-      this.selectedOption = this.product.options[0].measureQantity;
+      this.measureQantity = this.product.options[0].measureQantity;
       this.measurePrice = this.product.options[0].measurePrice;
+      this.selectedOptions = {
+        measurePrice: this.product.options[0].measurePrice,
+        measureQantity: this.product.options[0].measureQantity,
+        measureValue: this.product.options[0].measureValue,
+      };
     }
-    console.log(this.product);
   }
   onChange(option: any) {
     this.measurePrice = option.measurePrice;
-    console.log(option);
+    this.selectedOptions = option;
+    console.log(this.selectedOptions);
   }
   decreaseQuantity() {
     if (this.quantity !== undefined && this.quantity > 1) {
@@ -47,9 +53,12 @@ export class DialogOfProductComponent {
   addProduct(product: Product) {
     const cartProduct: any = {
       ...product,
+      options: this.selectedOptions,
       price: this.measurePrice ? this.measurePrice : product.price,
       quantity: this.quantity,
     };
+    console.log(cartProduct);
+
     this.cartService.addProductToCart(cartProduct);
     this.quantity = 1;
   }

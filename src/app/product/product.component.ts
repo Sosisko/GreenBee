@@ -13,8 +13,9 @@ import { CartService } from './../services/cart.service';
 export class ProductComponent implements OnInit {
   product$!: Observable<any>;
   quantity: number = 1;
-  selectedOption: any;
-  measurePrice = null
+  measureQantity: any;
+  selectedOptions: any;
+  measurePrice = null;
 
   constructor(
     private productsService: ProductsService,
@@ -35,15 +36,22 @@ export class ProductComponent implements OnInit {
     //Это позволит активировать первый инпут по умолчанию и отображать соответствующую цену.
     this.product$.subscribe((product) => {
       if (product.options) {
-        this.selectedOption = product.options[0].measureQantity;
+        this.measureQantity = product.options[0].measureQantity;
         this.measurePrice = product.options[0].measurePrice;
+        this.selectedOptions = {
+          measurePrice: product.options[0].measurePrice,
+          measureQantity: product.options[0].measureQantity,
+          measureValue: product.options[0].measureValue
+        };
+        console.log(this.selectedOptions);
       }
     });
   }
 
   onChange(option: any) {
     this.measurePrice = option.measurePrice;
-    console.log(option);
+    this.selectedOptions = option;
+    console.log(this.selectedOptions);
   }
 
   decreaseQuantity() {
@@ -58,16 +66,18 @@ export class ProductComponent implements OnInit {
     }
   }
 
-
-  // Создается новый объект cartProduct, который содержит все свойства продукта, 
-  // а также выбранную цену this.measurePrice и количество this.quantity. 
+  // Создается новый объект cartProduct, который содержит все свойства продукта,
+  // а также выбранную цену this.measurePrice и количество this.quantity.
   // Затем этот объект передается в метод addProductToCart сервиса корзины.
   addProduct(product: Product) {
     const cartProduct: any = {
       ...product,
+      options: this.selectedOptions,
       price: this.measurePrice ? this.measurePrice : product.price,
-      quantity: this.quantity
+      quantity: this.quantity,
     };
+    console.log(cartProduct);
+
     this.cartService.addProductToCart(cartProduct);
     this.quantity = 1;
   }
@@ -85,7 +95,7 @@ export class ProductComponent implements OnInit {
   //       console.log(cartProduct);
   //       this.cartService.addProductToCart(cartProduct);
   //     }
-     
+
   //   } else {
   //     const cartProduct: any = {
   //       ...product,

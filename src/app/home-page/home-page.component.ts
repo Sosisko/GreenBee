@@ -26,7 +26,6 @@ export class HomePageComponent {
     this.productsService.setCategory(this.category); //При переключении страницы, чтобы возвращалось в категорию All
 
     this.productsService.getAll().subscribe((products) => {
-      console.log(products);
     });
   }
 

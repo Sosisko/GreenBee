@@ -55,7 +55,6 @@ export class ProductPageComponent {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.data = product; // передаем product в data
     this.dialog.open(DialogOfProductComponent, dialogConfig);
-    console.log(dialogConfig);
   }
 
 }

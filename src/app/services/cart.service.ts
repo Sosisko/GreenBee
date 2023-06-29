@@ -53,7 +53,7 @@ export class CartService implements OnInit {
     dialogConfig.data = {
       product: product,
       totalQuantity$: this.totalQuantity$,
-      totalPrice$: this.totalPrice$
+      totalPrice$: this.totalPrice$,
     }; // передаем product в data
 
     dialogConfig.width = '600px';
@@ -66,28 +66,55 @@ export class CartService implements OnInit {
   // // у которого совпадает id. Таким образом, если idExists равно true,
   // // значит продукта с таким же id в массиве нет и можно добавлять новый,
   // // иначе выведется сообщение "Этот товар уже есть в корзине!".
+
+
+  //=================================================================================
   addProductToCart(product: Product) {
-    const idExists = this.cartProducts.every((item) => item.options.measureQantity !== product.options.measureQantity);
-    
-    //const idExists = this.cartProducts.every((item) => item.id !== product.id);
-    if (idExists) {
-      this.cartProducts.push(product);
-      this.productCount.next(this.cartProducts.length);
-      localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
-      localStorage.setItem(
-        'productCount',
-        JSON.stringify(this.productCount.getValue())
+    if (product.options && product.options.measureQantity !== undefined) {
+      const measureQantityExists = this.cartProducts.some(
+        (item) =>
+          item.options &&
+          item.options.measureQantity === product.options.measureQantity &&
+          item.id === product.id
       );
-      this.updateTotal();
-      this.openDialog(product); //Диалоговое окно с сообщением, что товар добавлен
-      this.alertService.success('Товар добавлен в корзину');
-      //console.log('Товар добавлен в корзину!');
-    } else {
-      this.alertService.warning('Этот товар уже есть в корзине!');
-      //console.log('Этот товар уже есть в корзине!');
-      return;
+      if (measureQantityExists) {
+        this.alertService.warning(
+          'Товар с такими параметрами уже есть в корзине!'
+        );
+        return;
+      }
+    } 
+    else {
+      const idExists = this.cartProducts.some((item) => item.id === product.id);
+      if (idExists) {
+        this.alertService.warning('Этот товар уже есть в корзине!');
+        return;
+      }
     }
+
+    this.cartProducts.push(product);
+    this.productCount.next(this.cartProducts.length);
+    localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
+    localStorage.setItem(
+      'productCount',
+      JSON.stringify(this.productCount.getValue())
+    );
+    this.updateTotal();
+    this.openDialog(product); //Диалоговое окно с сообщением, что товар добавлен
+    this.alertService.success('Товар добавлен в корзину');
   }
+
+  //===================================================================================================
+
+
+  
+
+
+
+
+
+
+
 
   removeProductFromCart(product: Product) {
     const productIndex = this.cartProducts.findIndex(

@@ -35,7 +35,7 @@
               <div class="input-options">
                 <input
                   type="radio"
-                  [(ngModel)]="selectedOption"
+                  [(ngModel)]="measureQantity"
                   [value]="option.measureQantity"
                   (change)="onChange(option)"
                 />
@@ -68,7 +68,7 @@
             </div>
   
             <div>
-              <button mat-dialog-close class="btn-add-to-cart" (click)="addProduct(product)">
+              <button class="btn-add-to-cart" (click)="addProduct(product)">
                 Добавить в корзину
               </button>
             </div>
