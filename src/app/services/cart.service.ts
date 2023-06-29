@@ -27,14 +27,18 @@ export class CartService implements OnInit {
 
   ngOnInit() {}
 
+  //
+
   updateQuantity(product: Product, newQuantity: number | undefined) {
-    const updatedProduct = { ...product, quantity: newQuantity };
     const productIndex = this.cartProducts.findIndex(
-      (item) => item.id === product.id
+      (item) => item.id === product.id && item.options === product.options
     );
     if (productIndex !== -1) {
+      const updatedProduct = { ...this.cartProducts[productIndex], quantity: newQuantity };
+      console.log(updatedProduct);
+      
       this.cartProducts.splice(productIndex, 1, updatedProduct);
-
+  
       localStorage.setItem('cartProducts', JSON.stringify(this.cartProducts));
       localStorage.setItem(
         'productCount',
@@ -47,6 +51,7 @@ export class CartService implements OnInit {
       return;
     }
   }
+
 
   openDialog(product: any) {
     const dialogConfig = new MatDialogConfig();
@@ -61,14 +66,19 @@ export class CartService implements OnInit {
     //console.log(dialogConfig);
   }
 
-  // //Метод every будет проверять каждый элемент массива и вернет true,
-  // // если все элементы не соответствуют условию в колбэке, и false - если найден элемент,
-  // // у которого совпадает id. Таким образом, если idExists равно true,
-  // // значит продукта с таким же id в массиве нет и можно добавлять новый,
-  // // иначе выведется сообщение "Этот товар уже есть в корзине!".
-
-
+  //Метод every будет проверять каждый элемент массива и вернет true,
+  // если все элементы не соответствуют условию в колбэке, и false - если найден элемент,
+  // у которого совпадает id. Таким образом, если idExists равно true,
+  // значит продукта с таким же id в массиве нет и можно добавлять новый,
+  // иначе выведется сообщение "Этот товар уже есть в корзине!".
   //=================================================================================
+
+  //При добавлении товара в корзину проверяется, есть ли опции у товара, далее проверяется
+  //есть ли в корзине товар с определённым measureQantity, если таковой есть, то не добавляем.
+  //Также после этого товар проверяется по id, чтобы другой товар с таким же measureQantity
+  //не был добавлен
+  //Товар без опций просто проверяется по id на предмет уже наличия в корзине, чтобы не добавлять такой же товар
+
   addProductToCart(product: Product) {
     if (product.options && product.options.measureQantity !== undefined) {
       const measureQantityExists = this.cartProducts.some(
@@ -107,18 +117,10 @@ export class CartService implements OnInit {
   //===================================================================================================
 
 
-  
-
-
-
-
-
-
-
 
   removeProductFromCart(product: Product) {
     const productIndex = this.cartProducts.findIndex(
-      (item) => item.id === product.id
+      (item) => item.id === product.id && item.options === product.options
     );
 
     if (productIndex !== -1) {
