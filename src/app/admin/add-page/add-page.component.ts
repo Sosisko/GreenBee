@@ -72,16 +72,14 @@ export class AddPageComponent implements OnInit {
   }
   //Удаляет опции
   delOption(option: any) {
-    const optionIndex = this.options.findIndex(
-      (item: any) => item.id === option.id
-    );
+    const optionIndex = this.options.indexOf(option);
     if (optionIndex !== -1) {
       this.options.splice(optionIndex, 1);
       this.alertService.danger('Опция удалена');
-      
     }
-    console.log(this.options);
   }
+
+
 
   //Метод очистки инпутов при нажатии на кнопку "Очистить"
   clearOption() {

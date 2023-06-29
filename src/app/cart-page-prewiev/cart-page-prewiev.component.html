@@ -6,7 +6,7 @@
       </div>
       <div class="flex">
         <div>
-          <p>{{ product.title }}</p>
+          <p>{{ product.title }} <span>{{product.options ? "(" +product.options.measureQantity+product.options.measureValue + ")" : null}}</span></p>
           <p>
             <b> {{ product.price | currency }} x {{ product.quantity }}</b>
           </p>

@@ -26,13 +26,22 @@
         cols="9"
         rowHeight="1:1"
       >
-        <mat-grid-tile colspan="2"
+        <mat-grid-tile colspan="1"
           ><quill-view-html
             class="img"
             [content]="product.image"
           ></quill-view-html
-          >{{ product.title }}</mat-grid-tile
-        >
+        ></mat-grid-tile>
+
+        <div class="product-title">
+          <mat-grid-tile colspan="1"
+            >{{ product.title }}
+            <span
+              >{{ product.options ? "(" +product.options.measureQantity+product.options.measureValue + ")" : null}}</span
+            ></mat-grid-tile
+          >
+        </div>
+
         <mat-grid-tile colspan="2"
           ><b> {{ product.price | currency }}</b></mat-grid-tile
         >

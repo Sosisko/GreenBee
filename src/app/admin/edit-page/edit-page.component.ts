@@ -148,14 +148,11 @@ export class EditPageComponent implements OnInit {
   //Удаляет опции
   delOption(option: any, event: any) {
     event.preventDefault();
-    const optionIndex = this.options.findIndex(
-      (item: any) => item.id === option.id
-    );
+    const optionIndex = this.options.indexOf(option);
     if (optionIndex !== -1) {
       this.options.splice(optionIndex, 1);
       this.alertService.danger('Опция удалена');
     }
-
   }
 
   //Метод очистки инпутов при нажатии на кнопку "Очистить"
