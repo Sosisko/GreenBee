@@ -1,3 +1,7 @@
+<div *ngIf="discountProcent" class="bage">
+  <span>-{{ discountProcent }}%</span>
+</div>
+
 <div class="image" (mouseenter)="animate()" (mouseleave)="animate()">
   <a [routerLink]="['/product', product.id]">
     <quill-view-html
@@ -15,7 +19,13 @@
 <div class="product-title">
   <a [routerLink]="['/product', product.id]">{{ product.title }}</a>
 </div>
-<div class="product-price">{{ product.price | currency }}</div>
+<div class="price">
+  
+  <div class="product-price">{{ product.price | currency }}</div>
+  <div *ngIf="product.discount" class="regular-price">
+    {{ +product.price * +product.discount | currency }}
+  </div>
+</div>
 
 <div *ngIf="product.options; else whithoutOptions">
   <button class="btn-add-cart" (click)="openDialog(product)">

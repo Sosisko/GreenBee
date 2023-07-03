@@ -21,6 +21,7 @@ export interface Product {
   description: string;
   image?: any;
   price: number;
+  discount? : string;
   category: string;
   date: Date;
   quantity?: number;

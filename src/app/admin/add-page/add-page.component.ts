@@ -31,6 +31,7 @@ export class AddPageComponent implements OnInit {
       image: new FormControl(null, Validators.required),
       description: new FormControl(null, Validators.required),
       price: new FormControl(null, Validators.required),
+      discount: new FormControl(null),
       category: new FormControl(null, Validators.required),
       measureValue: new FormControl(null),
       measureQantity: new FormControl(null),
@@ -104,6 +105,7 @@ export class AddPageComponent implements OnInit {
         this.options.length > 0
           ? this.options[0].measurePrice
           : this.form.value.price,
+      discount: this.form.value.discount,    
       category: this.form.value.category,
       options: this.options,
       date: new Date(),

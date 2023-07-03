@@ -1,10 +1,24 @@
-a{
+.bage {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  span {
+    background-color: #e85b40;
+    color: #fff;
+    padding: 5px 15px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    font-size: 11px;
+  }
+}
+
+a {
   cursor: pointer;
 }
 
 .image {
   position: relative;
-
 }
 .btn-group {
   position: absolute;
@@ -52,10 +66,21 @@ a{
   text-decoration: none;
 }
 
-.product-price {
-  font-weight: 700;
-  padding: 10px 0;
-  padding-bottom: 20px;
+.price {
+  margin-bottom: 20px;
+  .product-price {
+    display: inline;
+    font-weight: 700;
+    padding: 10px 0;
+    padding-bottom: 20px;
+  }
+  .regular-price {
+    display: inline;
+    margin-left: 10px;
+    color: #acacac;
+    text-decoration: line-through;
+    font-weight: 500;
+  }
 }
 
 .btn-add-cart {

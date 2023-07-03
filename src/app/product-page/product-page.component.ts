@@ -31,18 +31,30 @@ import { DialogOfProductComponent } from '../shared/dialog-of-product/dialog-of-
     ]),
   ],
 })
-export class ProductPageComponent {
+export class ProductPageComponent implements OnInit {
   btnState = 'start';
   animate() {
     this.btnState = this.btnState === 'end' ? 'start' : 'end';
   }
 
   @Input() product!: Product;
+  discountProcent = 0;
+
   visible: boolean = true;
   quantity: number = 1;
 
+  
 
-  constructor(private cartService: CartService, public dialog: MatDialog) {}
+  constructor(private cartService: CartService, public dialog: MatDialog) {
+    
+  }
+
+  ngOnInit() {
+    if (this.product && this.product.discount) {
+      this.discountProcent = Math.trunc((+this.product.discount) * 100 - 100);
+    }
+   }
+
 
 
   onAddToCart(product: Product) {

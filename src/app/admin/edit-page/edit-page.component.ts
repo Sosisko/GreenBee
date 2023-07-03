@@ -67,6 +67,7 @@ export class EditPageComponent implements OnInit {
             Validators.required
           ),
           price: new FormControl(this.product.price, Validators.required),
+          discount: new FormControl(this.product.discount),
           category: new FormControl(this.product.category, Validators.required),
           options: optionsFormArray,
           measureValue: new FormControl(),
@@ -97,6 +98,7 @@ export class EditPageComponent implements OnInit {
           this.options.length > 0
             ? this.options[0].measurePrice
             : this.form.value.price,
+        discount:this.form.value.discount,
         category: this.form.value.category,
         options: this.options,
         date: new Date(),
