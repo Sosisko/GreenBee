@@ -16,6 +16,8 @@ export class ProductComponent implements OnInit {
   measureQantity: any;
   selectedOptions: any;
   measurePrice = null;
+  regularPrice = 0;
+  discountProcent = 0;
 
   constructor(
     private productsService: ProductsService,
@@ -43,15 +45,27 @@ export class ProductComponent implements OnInit {
           measureQantity: product.options[0].measureQantity,
           measureValue: product.options[0].measureValue
         };
+        if(this.measurePrice) {
+          this.regularPrice = this.measurePrice * product.discount
+        }
         console.log(this.selectedOptions);
       }
+      this.regularPrice = product.price * product.discount
+      this.discountProcent = Math.trunc((+product.discount) * 100 - 100);
     });
+    
+
   }
 
-  onChange(option: any) {
+  onChange(option: any, product: Product) {
     this.measurePrice = option.measurePrice;
     this.selectedOptions = option;
     console.log(this.selectedOptions);
+
+    if (this.measurePrice !== null && product.discount !== undefined) {
+      this.regularPrice = this.measurePrice* +product.discount
+    }
+    
   }
 
   decreaseQuantity() {

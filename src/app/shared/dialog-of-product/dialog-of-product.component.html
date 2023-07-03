@@ -4,6 +4,9 @@
           <button mat-dialog-close class="btn-back" routerLink="/">x</button>
     <div class="container">
       <div class="content-wrapper">
+        <div *ngIf="discountProcent" class="bage">
+          <span>-{{ discountProcent }}%</span>
+        </div>
         <div class="image">
           <quill-view-html
             [content]="product.image"
@@ -25,6 +28,7 @@
           <div class="price">
             <span *ngIf="measurePrice; else productPrice">{{ measurePrice | currency }}</span>
             <ng-template #productPrice> <span>{{ product.price | currency }}</span></ng-template>
+            <span class="regular-price">{{regularPrice | currency }}</span>
           </div>
   
           <div *ngIf="product.options; else nonOption">ЕСТЬ ОПЦИИ!</div>

@@ -16,6 +16,8 @@ export class DialogOfProductComponent {
   measureQantity: any;
   selectedOptions: any;
   measurePrice = null;
+  regularPrice = 0;
+  discountProcent = 0;
 
   constructor(
     @Inject(MAT_DIALOG_DATA) public product: any,
@@ -31,12 +33,20 @@ export class DialogOfProductComponent {
         measureQantity: this.product.options[0].measureQantity,
         measureValue: this.product.options[0].measureValue,
       };
+      if(this.measurePrice) {
+        this.regularPrice = this.measurePrice * this.product.discount
+      }
     }
+    this.regularPrice = this.product.price * this.product.discount
+      this.discountProcent = Math.trunc((+this.product.discount) * 100 - 100);
   }
   onChange(option: any) {
     this.measurePrice = option.measurePrice;
     this.selectedOptions = option;
     console.log(this.selectedOptions);
+    if (this.measurePrice !== null && this.product.discount !== undefined) {
+      this.regularPrice = this.measurePrice* +this.product.discount
+    }
   }
   decreaseQuantity() {
     if (this.quantity !== undefined && this.quantity > 1) {

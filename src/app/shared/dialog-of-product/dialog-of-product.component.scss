@@ -50,6 +50,13 @@
   font-weight: 800;
   color: #0d7a52;
   line-height: 1;
+  .regular-price {
+    margin-left: 40px;
+    font-size: 2rem;
+    color: #acacac;
+    text-decoration: line-through;
+    font-weight: 700;
+  }
 }
 
 .description {
@@ -217,3 +224,17 @@ input[type="radio"]:checked{
   }
 }
 
+.bage {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 2;
+  span {
+    background-color: #e85b40;
+    color: #fff;
+    padding: 5px 15px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    font-size: 11px;
+  }
+}
