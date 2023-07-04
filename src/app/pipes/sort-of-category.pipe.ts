@@ -13,7 +13,6 @@ export class SortOfCategoryPipe implements PipeTransform {
     }
     return products.filter((product) => {
       return product.category == category
-      
     });
   }
 }

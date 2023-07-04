@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ProductsService } from '../services/products.service';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, switchMap } from 'rxjs';
@@ -19,6 +19,8 @@ export class ProductComponent implements OnInit {
   regularPrice = 0;
   discountProcent = 0;
 
+
+
   constructor(
     private productsService: ProductsService,
     private cartService: CartService,
@@ -26,6 +28,7 @@ export class ProductComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+
     this.product$ = this.route.params.pipe(
       switchMap((params) => {
         return this.productsService.getById(params['id']);

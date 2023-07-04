@@ -24,9 +24,6 @@ export class HomePageComponent {
   ngOnInit() {
     this.products$ = this.productsService.getAll();
     this.productsService.setCategory(this.category); //При переключении страницы, чтобы возвращалось в категорию All
-
-    this.productsService.getAll().subscribe((products) => {
-    });
   }
 
   setCat(category: string) {
@@ -37,7 +34,7 @@ export class HomePageComponent {
           category: this.category,
         },
       });
-      this.productsService.setCategory(this.category);
+    this.productsService.setCategory(this.category);
       this.p = 1;
     }
   }

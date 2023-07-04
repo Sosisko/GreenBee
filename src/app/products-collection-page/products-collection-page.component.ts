@@ -1,8 +1,5 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { ProductsService } from '../services/products.service';
-import { Product } from '../models/interfaces';
-import { Subscription } from 'rxjs';
-
 
 @Component({
   selector: 'app-products-collection-page',
@@ -10,5 +7,29 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./products-collection-page.component.scss'],
 })
 export class ProductsCollectionPageComponent {
-  
+  products$!: any;
+  selectedOption!: string;
+  sortingColumn!: string;
+  @Output() boxView = true;
+  @Output() fullView = false;
+
+  constructor(public productsService: ProductsService) {}
+
+  ngOnInit() {
+    this.products$ = this.productsService.getAll();
+  }
+
+  onBoxView() {
+    this.boxView = true;
+    this.fullView = false;
+  }
+  onFullView() {
+    this.boxView = false;
+    this.fullView = true;
+  }
+
+ 
+  onOptionChange(selectedOption: string) {
+    this.selectedOption = selectedOption;
+  }
 }

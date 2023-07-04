@@ -1,1 +1,46 @@
-<h1>Collection is works!</h1>
+<div class="container">
+  <div class="collection-wrapper">
+    <div class="left-side"></div>
+    <div class="right-side">
+      <div class="filters-wrapper">
+        <h2>Greenbee</h2>
+        <div class="filters-head">
+          <div class="left-side-filters-head">
+            <div class="view-type-btn">
+              <button (click)="onBoxView()" [ngClass]="boxView ? 'active' : ''"><mat-icon>apps</mat-icon></button>
+              <button (click)="onFullView()" [ngClass]="fullView ? 'active' : ''"><mat-icon>menu</mat-icon></button>
+            </div>
+            <span>Показано 12 продуктов.</span>
+          </div>
+
+          <div class="select-filters-wrapper">
+            <select class="custom-select" [(ngModel)]="selectedOption" (ngModelChange)="onOptionChange($event)">
+              <option value="titleAsc">По алфавиту А-Я</option>
+              <option value="titleDesc">По алфавиту Я-А</option>
+              <option value="priceAsc">По возрастанию цены</option>
+              <option value="priceDesc">По убыванию цены</option>
+            </select>
+            <span class="custom-arrow"></span>
+          </div>
+          
+        </div>
+
+      </div>
+      <div
+        class="products-list"
+        
+        *ngIf="products$ | async as products; else loading"
+      >
+        <app-product-page
+          class="producst-list--item"
+          [ngClass]="fullView ? 'active' : ''"
+          *ngFor="let product of $any(products)  | sortOfAZ:selectedOption"
+          [product]="product"
+          [fullView]="fullView"
+        >
+        </app-product-page>
+      </div>
+      <ng-template #loading>Загрузка продуктов...</ng-template>
+    </div>
+  </div>
+</div>

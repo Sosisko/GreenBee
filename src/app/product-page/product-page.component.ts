@@ -12,7 +12,6 @@ import {
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { DialogOfProductComponent } from '../shared/dialog-of-product/dialog-of-product.component';
 
-
 @Component({
   selector: 'app-product-page',
   templateUrl: './product-page.component.html',
@@ -38,24 +37,20 @@ export class ProductPageComponent implements OnInit {
   }
 
   @Input() product!: Product;
+  @Input() fullView!: boolean;
+
   discountProcent = 0;
 
   visible: boolean = true;
   quantity: number = 1;
 
-  
-
-  constructor(private cartService: CartService, public dialog: MatDialog) {
-    
-  }
+  constructor(private cartService: CartService, public dialog: MatDialog) {}
 
   ngOnInit() {
     if (this.product && this.product.discount) {
-      this.discountProcent = Math.trunc((+this.product.discount) * 100 - 100);
+      this.discountProcent = Math.trunc(+this.product.discount * 100 - 100);
     }
-   }
-
-
+  }
 
   onAddToCart(product: Product) {
     product.quantity = this.quantity;
@@ -68,5 +63,4 @@ export class ProductPageComponent implements OnInit {
     dialogConfig.data = product; // передаем product в data
     this.dialog.open(DialogOfProductComponent, dialogConfig);
   }
-
 }

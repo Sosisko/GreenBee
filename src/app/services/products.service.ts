@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ProductsService {
-category!: string
+  category!: string
 
   constructor(private http: HttpClient) { }
 

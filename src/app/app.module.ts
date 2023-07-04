@@ -22,7 +22,6 @@ import { PipesModule } from './pipes/pipes.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { AlertComponent } from './shared/alert/alert.component';
-import { AlertService } from './services/alert.service';
 import { CartPagePrewievComponent } from './cart-page-prewiev/cart-page-prewiev.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { DialogOfProductComponent } from './shared/dialog-of-product/dialog-of-product.component';
@@ -44,6 +43,7 @@ registerLocaleData(localeRu, 'ru');
     CartPagePrewievComponent,
     DialogOfProductComponent,
     DialogAddCartComponent,
+
   ],
 
   imports: [
