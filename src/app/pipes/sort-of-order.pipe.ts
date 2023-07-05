@@ -1,10 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { Product } from '../models/interfaces';
 
 @Pipe({
-  name: 'sortOfAZ',
+  name: 'sortOfOrder',
 })
-export class SortOfAZPipe implements PipeTransform {
+export class SortOfOrder implements PipeTransform {
   transform(products: any[], selectedOption: string): any[] {
     if (products && selectedOption && products.length > 0) {
       products.sort((prd1: any, prd2: any) => {

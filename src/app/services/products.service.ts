@@ -8,7 +8,7 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ProductsService {
-  category!: string
+  category!: string;
 
   constructor(private http: HttpClient) { }
 
@@ -65,9 +65,9 @@ export class ProductsService {
     return this.http.patch(`${environment.fbDbUrl}/products/${product.id}.json`, product)
   }
 
-setCategory (category: string) {
-  this.category = category
-}
+  setCategory (category: string) {
+    this.category = category
+  }
     
   
 }

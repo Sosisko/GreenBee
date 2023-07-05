@@ -28,6 +28,8 @@ import { DialogOfProductComponent } from './shared/dialog-of-product/dialog-of-p
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { DialogAddCartComponent } from './shared/dialog-add-cart/dialog-add-cart.component';
+import { MatSliderModule } from '@angular/material/slider';
+
 
 registerLocaleData(localeRu, 'ru');
 @NgModule({
@@ -47,7 +49,7 @@ registerLocaleData(localeRu, 'ru');
   ],
 
   imports: [
-    AlertComponent,
+  AlertComponent,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
@@ -61,6 +63,7 @@ registerLocaleData(localeRu, 'ru');
     NgxPaginationModule,
     MatDialogModule,
     MatButtonModule,
+    MatSliderModule,
     QuillModule.forRoot(),
   ],
   providers: [{ provide: LOCALE_ID, useValue: 'ru' }],

@@ -11,7 +11,7 @@ export class HomePageComponent {
   products$!: any;
   productName: any;
 
-  category = '';
+  category = 'All';
 
   p: number = 1;
   collection: any[] = this.products$;
@@ -28,14 +28,7 @@ export class HomePageComponent {
 
   setCat(category: string) {
     this.category = category;
-    if (this.category !== '') {
-      this.router.navigate(['/'], {
-        queryParams: {
-          category: this.category,
-        },
-      });
     this.productsService.setCategory(this.category);
-      this.p = 1;
-    }
+    this.p = 1;
   }
 }

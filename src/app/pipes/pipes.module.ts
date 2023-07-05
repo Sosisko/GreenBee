@@ -2,15 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SearchPipe } from './search.pipe';
 import { SortOfCategoryPipe } from './sort-of-category.pipe';
-import { SortOfAZPipe } from './sort-of-az.pipe';
+import { SortOfOrder } from './sort-of-order.pipe';
+import { SortOfCategoryProductCollectionPipe } from './sort-of-category-product-collection.pipe';
 
 
 
 @NgModule({
-  declarations: [SearchPipe, SortOfCategoryPipe, SortOfAZPipe],
+  declarations: [SearchPipe, SortOfCategoryPipe, SortOfOrder, SortOfCategoryProductCollectionPipe],
   imports: [
     CommonModule,
   ],
-  exports: [SearchPipe, SortOfCategoryPipe, SortOfAZPipe]
+  exports: [SearchPipe, SortOfCategoryPipe, SortOfOrder, SortOfCategoryProductCollectionPipe]
 })
 export class PipesModule { }

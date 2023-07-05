@@ -1,20 +1,124 @@
 <div class="container">
   <div class="collection-wrapper">
-    <div class="left-side"></div>
+    <div class="left-side">
+      <div class="left-side-title">
+        <h2>Фильтровать по</h2>
+      </div>
+      <div class="left-side-filters-wrapper">
+        <div class="cat-filter">
+          <h3>Категориям</h3>
+          <ul class="cat-filter-list">
+            <li>
+              <input
+                type="checkbox"
+                id="fruits"
+                value="Fruits"
+                (change)="onCategoryChange($event, 'Fruits')"
+              />
+              <label for="fruits">Fruits</label>
+           
+            </li>
+            <li>
+              <input
+                type="checkbox"
+                id="vegetable"
+                value="Vegetable"
+                (change)="onCategoryChange($event, 'Vegetable')"
+              />
+              <label for="vegetable">Vegetable</label>
+            </li>
+            <li>
+              <!-- <a (click)="setCat('Juices')"(change)="onCategoryChange($event, 'juices')">Соки</a> -->
+              <input
+                type="checkbox"
+                id="juices"
+                value="Juices"
+                (change)="onCategoryChange($event, 'Juices')"
+              />
+              <label for="juices">Juices</label>
+            </li>
+          </ul>
+        </div>
+        <div class="size-filter">
+          <h3>Размеру</h3>
+          <ul class="size-filter-list">
+            <li>
+              <input type="checkbox" id="1l" name="1l" />
+              <label for="1l">1L</label>
+            </li>
+            <li>
+              <input type="checkbox" id="2l" name="2l" />
+              <label for="2l">2L</label>
+            </li>
+            <li>
+              <input type="checkbox" id="5l" name="5l" />
+              <label for="5l">5L</label>
+            </li>
+            <li>
+              <input type="checkbox" id="10l" name="10l" />
+              <label for="10l">10L</label>
+            </li>
+            <li>
+              <input type="checkbox" id="20l" name="20l" />
+              <label for="20l">20L</label>
+            </li>
+            <li>
+              <input type="checkbox" id="1kg" name="1kg" />
+              <label for="1kg">1Kg</label>
+            </li>
+            <li>
+              <input type="checkbox" id="2kg" name="2kg" />
+              <label for="2kg">2Kg</label>
+            </li>
+            <li>
+              <input type="checkbox" id="5kg" name="5kg" />
+              <label for="5kg">5Kg</label>
+            </li>
+            <li>
+              <input type="checkbox" id="10kg" name="10kg" />
+              <label for="10kg">10Kg</label>
+            </li>
+            <li>
+              <input type="checkbox" id="20kg" name="20kg" />
+              <label for="20kg">20Kg</label>
+            </li>
+          </ul>
+        </div>
+        <div class="price-filter">
+          <h3>Цене</h3>
+          <mat-slider min="200" max="500">
+            <input value="300" matSliderStartThumb />
+            <input value="400" matSliderEndThumb />
+          </mat-slider>
+        </div>
+      </div>
+    </div>
+
     <div class="right-side">
       <div class="filters-wrapper">
         <h2>Greenbee</h2>
         <div class="filters-head">
           <div class="left-side-filters-head">
             <div class="view-type-btn">
-              <button (click)="onBoxView()" [ngClass]="boxView ? 'active' : ''"><mat-icon>apps</mat-icon></button>
-              <button (click)="onFullView()" [ngClass]="fullView ? 'active' : ''"><mat-icon>menu</mat-icon></button>
+              <button (click)="onBoxView()" [ngClass]="boxView ? 'active' : ''">
+                <mat-icon>apps</mat-icon>
+              </button>
+              <button
+                (click)="onFullView()"
+                [ngClass]="fullView ? 'active' : ''"
+              >
+                <mat-icon>menu</mat-icon>
+              </button>
             </div>
             <span>Показано 12 продуктов.</span>
           </div>
 
           <div class="select-filters-wrapper">
-            <select class="custom-select" [(ngModel)]="selectedOption" (ngModelChange)="onOptionChange($event)">
+            <select
+              class="custom-select"
+              [(ngModel)]="selectedOption"
+              (ngModelChange)="onOptionChange($event)"
+            >
               <option value="titleAsc">По алфавиту А-Я</option>
               <option value="titleDesc">По алфавиту Я-А</option>
               <option value="priceAsc">По возрастанию цены</option>
@@ -22,19 +126,18 @@
             </select>
             <span class="custom-arrow"></span>
           </div>
-          
         </div>
-
       </div>
       <div
         class="products-list"
-        
         *ngIf="products$ | async as products; else loading"
       >
+      <!-- <p>| sortOfCategoryProductCollection: categoryFilters</p> -->
         <app-product-page
           class="producst-list--item"
           [ngClass]="fullView ? 'active' : ''"
-          *ngFor="let product of $any(products)  | sortOfAZ:selectedOption"
+          *ngFor="let product of $any(products) | sortOfOrder : selectedOption | sortOfCategoryProductCollection: categoryFilters"
+          
           [product]="product"
           [fullView]="fullView"
         >
