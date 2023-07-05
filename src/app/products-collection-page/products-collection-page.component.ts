@@ -1,4 +1,4 @@
-import { Component, Output } from '@angular/core';
+import { ChangeDetectorRef, Component, Output } from '@angular/core';
 import { ProductsService } from '../services/products.service';
 import { Product } from '../models/interfaces';
 
@@ -44,10 +44,10 @@ export class ProductsCollectionPageComponent {
     this.selectedOption = selectedOption;
   }
 
+
   onCategoryChange(event: any, category: string) {
     if (event.target.checked) {
-      this.categoryFilters.push(category);
-      // this.categoryFilters = category
+      this.categoryFilters = [...this.categoryFilters, category]; // use spread syntax to create a new array with the new value
     } else {
       this.categoryFilters = this.categoryFilters.filter(
         (c: string) => c !== category
