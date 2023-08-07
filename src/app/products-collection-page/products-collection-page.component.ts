@@ -1,6 +1,5 @@
-import { ChangeDetectorRef, Component, Output } from '@angular/core';
+import { Component, Output } from '@angular/core';
 import { ProductsService } from '../services/products.service';
-import { Product } from '../models/interfaces';
 
 @Component({
   selector: 'app-products-collection-page',
@@ -9,7 +8,7 @@ import { Product } from '../models/interfaces';
 })
 export class ProductsCollectionPageComponent {
   products$!: any;
-  selectedOption!: string;
+  selectedOption: string = 'default';
   sortingColumn!: string;
   @Output() boxView = true;
   @Output() fullView = false;
@@ -17,7 +16,7 @@ export class ProductsCollectionPageComponent {
   products: any;
 
   categoryFilters: string[] = [];
-  //categoryFilters: any;
+  measureFilters: string[] = [];
 
   constructor(public productsService: ProductsService) {}
 
@@ -28,7 +27,6 @@ export class ProductsCollectionPageComponent {
       this.products = products;
       console.log(this.products);
     });
-
       
   }
 
@@ -47,12 +45,25 @@ export class ProductsCollectionPageComponent {
 
   onCategoryChange(event: any, category: string) {
     if (event.target.checked) {
-      this.categoryFilters = [...this.categoryFilters, category]; // use spread syntax to create a new array with the new value
+      this.categoryFilters = [...this.categoryFilters, category];//Если присваивать без spread, то pipe не чувствует первое изменение массива
     } else {
       this.categoryFilters = this.categoryFilters.filter(
         (c: string) => c !== category
       );
     }
     console.log(this.categoryFilters);
+   
+  }
+
+  onMeasureValueChange (event: any, measure:string) {
+    if (event.target.checked) {
+      this.measureFilters = [...this.measureFilters, measure];//Если присваивать без spread, то pipe не чувствует первое изменение массива
+    } else {
+      this.measureFilters = this.measureFilters.filter(
+        (c: string) => c !== measure
+      );
+    }
+    console.log(this.measureFilters);
+   
   }
 }

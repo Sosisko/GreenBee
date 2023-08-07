@@ -6,7 +6,6 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class SortOfCategoryProductCollectionPipe implements PipeTransform {
   transform(products: any, categoryFilters: string[]): any {
     let result = [];
-    console.log('Я отработал');
     
     if (!categoryFilters || categoryFilters.length === 0) {
       return products;
@@ -15,7 +14,7 @@ export class SortOfCategoryProductCollectionPipe implements PipeTransform {
         categoryFilters.includes(product.category)
       );
     }
-    console.log(result);
+   
     return result;
   }
 }

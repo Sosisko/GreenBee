@@ -31,18 +31,18 @@ import { DialogOfProductComponent } from '../shared/dialog-of-product/dialog-of-
   ],
 })
 export class ProductPageComponent implements OnInit {
+
   btnState = 'start';
   animate() {
     this.btnState = this.btnState === 'end' ? 'start' : 'end';
   }
-
+ 
   @Input() product!: Product;
   @Input() fullView!: boolean;
 
   discountProcent = 0;
 
-  visible: boolean = true;
-  quantity: number = 1;
+   quantity: number = 1;
 
   constructor(private cartService: CartService, public dialog: MatDialog) {}
 

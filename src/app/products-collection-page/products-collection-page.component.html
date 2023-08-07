@@ -16,7 +16,6 @@
                 (change)="onCategoryChange($event, 'Fruits')"
               />
               <label for="fruits">Fruits</label>
-           
             </li>
             <li>
               <input
@@ -43,43 +42,93 @@
           <h3>Размеру</h3>
           <ul class="size-filter-list">
             <li>
-              <input type="checkbox" id="1l" name="1l" />
+              <input
+                type="checkbox"
+                id="1l"
+                name="1l"
+                (change)="onMeasureValueChange($event, '1L')"
+              />
               <label for="1l">1L</label>
             </li>
             <li>
-              <input type="checkbox" id="2l" name="2l" />
+              <input
+                type="checkbox"
+                id="2l"
+                name="2l"
+                (change)="onMeasureValueChange($event, '2L')"
+              />
               <label for="2l">2L</label>
             </li>
             <li>
-              <input type="checkbox" id="5l" name="5l" />
+              <input
+                type="checkbox"
+                id="5l"
+                name="5l"
+                (change)="onMeasureValueChange($event, '5L')"
+              />
               <label for="5l">5L</label>
             </li>
             <li>
-              <input type="checkbox" id="10l" name="10l" />
+              <input
+                type="checkbox"
+                id="10l"
+                name="10l"
+                (change)="onMeasureValueChange($event, '10L')"
+              />
               <label for="10l">10L</label>
             </li>
             <li>
-              <input type="checkbox" id="20l" name="20l" />
+              <input
+                type="checkbox"
+                id="20l"
+                name="20l"
+                (change)="onMeasureValueChange($event, '20L')"
+              />
               <label for="20l">20L</label>
             </li>
             <li>
-              <input type="checkbox" id="1kg" name="1kg" />
+              <input
+                type="checkbox"
+                id="1kg"
+                name="1kg"
+                (change)="onMeasureValueChange($event, '1Kg')"
+              />
               <label for="1kg">1Kg</label>
             </li>
             <li>
-              <input type="checkbox" id="2kg" name="2kg" />
+              <input
+                type="checkbox"
+                id="2kg"
+                name="2kg"
+                (change)="onMeasureValueChange($event, '2Kg')"
+              />
               <label for="2kg">2Kg</label>
             </li>
             <li>
-              <input type="checkbox" id="5kg" name="5kg" />
+              <input
+                type="checkbox"
+                id="5kg"
+                name="5kg"
+                (change)="onMeasureValueChange($event, '5Kg')"
+              />
               <label for="5kg">5Kg</label>
             </li>
             <li>
-              <input type="checkbox" id="10kg" name="10kg" />
+              <input
+                type="checkbox"
+                id="10kg"
+                name="10kg"
+                (change)="onMeasureValueChange($event, '10Kg')"
+              />
               <label for="10kg">10Kg</label>
             </li>
             <li>
-              <input type="checkbox" id="20kg" name="20kg" />
+              <input
+                type="checkbox"
+                id="20kg"
+                name="20kg"
+                (change)="onMeasureValueChange($event, '20Kg')"
+              />
               <label for="20kg">20Kg</label>
             </li>
           </ul>
@@ -119,6 +168,7 @@
               [(ngModel)]="selectedOption"
               (ngModelChange)="onOptionChange($event)"
             >
+              <option value="default">По умолчанию</option>
               <option value="titleAsc">По алфавиту А-Я</option>
               <option value="titleDesc">По алфавиту Я-А</option>
               <option value="priceAsc">По возрастанию цены</option>
@@ -132,12 +182,16 @@
         class="products-list"
         *ngIf="products$ | async as products; else loading"
       >
-      <!-- <p>| sortOfCategoryProductCollection: categoryFilters</p> -->
+        <!-- <p>| sortOfCategoryProductCollection: categoryFilters</p> -->
         <app-product-page
           class="producst-list--item"
           [ngClass]="fullView ? 'active' : ''"
-          *ngFor="let product of $any(products) | sortOfOrder : selectedOption | sortOfCategoryProductCollection: categoryFilters"
-          
+          *ngFor="
+            let product of $any(products)
+              | sortOfCategoryProductCollection : categoryFilters
+              | sortOfMeasureProductCollection : measureFilters
+              | sortOfOrder : selectedOption
+          "
           [product]="product"
           [fullView]="fullView"
         >
