@@ -193,7 +193,6 @@
         class="products-list"
         *ngIf="products$ | async as products; else loading"
       >
-        <!-- <p>| sortOfCategoryProductCollection: categoryFilters</p> -->
         <app-product-page
           class="producst-list--item"
           [ngClass]="fullView ? 'active' : ''"
