@@ -215,3 +215,28 @@ p {
     left: 35%;
   }
 }
+mat-slider {
+  width: 200px;
+}
+
+.mat-mdc-slider.mat-primary {
+  --mdc-slider-handle-color: #0d7a52;
+  --mdc-slider-focus-handle-color: #0d7a52;
+  --mdc-slider-hover-handle-color: #0d7a52;
+  --mdc-slider-active-track-color: #0d7a52;
+  --mdc-slider-inactive-track-color: #0d7a52;
+  --mdc-slider-with-tick-marks-active-container-color: #fff;
+  --mdc-slider-with-tick-marks-inactive-container-color: #0d7a52;
+  --mat-mdc-slider-ripple-color: #0d7a52;
+  --mat-mdc-slider-hover-ripple-color: rgba(31, 162, 110, 0.05);
+  --mat-mdc-slider-focus-ripple-color: rgba(31, 162, 110, 0.05);
+}
+
+.price-filter {
+  p {
+    text-align: left;
+    b {
+      margin-left: 10px;
+    }
+  }
+}

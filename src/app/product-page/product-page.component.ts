@@ -37,12 +37,13 @@ export class ProductPageComponent implements OnInit {
     this.btnState = this.btnState === 'end' ? 'start' : 'end';
   }
  
+ 
   @Input() product!: Product;
   @Input() fullView!: boolean;
 
   discountProcent = 0;
 
-   quantity: number = 1;
+  quantity: number = 1;
 
   constructor(private cartService: CartService, public dialog: MatDialog) {}
 

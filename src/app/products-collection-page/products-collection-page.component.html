@@ -27,7 +27,6 @@
               <label for="vegetable">Vegetable</label>
             </li>
             <li>
-              <!-- <a (click)="setCat('Juices')"(change)="onCategoryChange($event, 'juices')">Соки</a> -->
               <input
                 type="checkbox"
                 id="juices"
@@ -135,10 +134,22 @@
         </div>
         <div class="price-filter">
           <h3>Цене</h3>
-          <mat-slider min="200" max="500">
-            <input value="300" matSliderStartThumb />
-            <input value="400" matSliderEndThumb />
+
+          <mat-slider
+            [min]="minPriceOfProductsArray"
+            [max]="maxPriceOfProductsArray"
+            discrete
+          >
+            <input [(ngModel)]="minPrice" matSliderStartThumb />
+            <input [(ngModel)]="maxPrice" matSliderEndThumb />
           </mat-slider>
+
+          <p>
+            От<b>{{ minPrice | currency }}</b>
+          </p>
+          <p>
+            До<b>{{ maxPrice | currency }}</b>
+          </p>
         </div>
       </div>
     </div>
@@ -190,6 +201,7 @@
             let product of $any(products)
               | sortOfCategoryProductCollection : categoryFilters
               | sortOfMeasureProductCollection : measureFilters
+              | sortOfPrice : minPrice : maxPrice
               | sortOfOrder : selectedOption
           "
           [product]="product"

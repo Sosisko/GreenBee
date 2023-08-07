@@ -5,33 +5,6 @@ import { Product } from '../models/interfaces';
   name: 'sortOfOrder',
 })
 export class SortOfOrder implements PipeTransform {
-  // transform(products: Product[], selectedOption: string): any[] {
-  //   if (products && selectedOption && products.length > 0) {
-  //     products.sort((prd1: any, prd2: any) => {
-  //       if (selectedOption === 'titleAsc') {
-  //         if (prd1.title < prd2.title) return -1;
-  //         else return 1;
-  //       }
-  //       if (selectedOption === 'titleDesc') {
-  //         if (prd1.title > prd2.title) return -1;
-  //         else return 1;
-  //       }
-  //       if (selectedOption === 'priceAsc') {
-  //         if (prd1.price < prd2.price) return -1;
-  //         else return 1;
-  //       }
-  //       if (selectedOption === 'priceDesc') {
-  //         if (prd1.price > prd2.price) return -1;
-  //         else return 1;
-  //       }
-  //       return 0;
-  //     });
-  //   }
-
-  //   return products;
-  // }
-
-
   transform(products: Product[], selectedOption: string): any[] {
     if (products && selectedOption && products.length > 0) {
       switch (selectedOption) {
@@ -51,7 +24,26 @@ export class SortOfOrder implements PipeTransform {
             products.sort((prd1: any, prd2: any) => prd1.id < prd2.id ? -1 : 1);
       }
     }
-  
+
     return products;
   }
+  
+  //  transform(products:any, selectedOption:any) {
+  //   if (products && selectedOption && products.length > 0) {
+  //     if (selectedOption === 'titleAsc') {
+  //       products.sort((prd1: { title: number; }, prd2: { title: number; }) => prd1.title < prd2.title ? -1 : 1);
+  //     } else if (selectedOption === 'titleDesc') {
+  //       products.sort((prd1: { title: number; }, prd2: { title: number; }) => prd1.title > prd2.title ? -1 : 1);
+  //     } else if (selectedOption === 'priceAsc') {
+  //       products.sort((prd1: { price: number; }, prd2: { price: number; }) => prd1.price < prd2.price ? -1 : 1);
+  //     } else if (selectedOption === 'priceDesc') {
+  //       products.sort((prd1: { price: number; }, prd2: { price: number; }) => prd1.price > prd2.price ? -1 : 1);
+  //     } else {
+  //       products.sort((prd1: { id: number; }, prd2: { id: number; }) => prd1.id < prd2.id ? -1 : 1);
+  //     }
+  //   }
+  
+  //   return products;
+  // }
+  
 }

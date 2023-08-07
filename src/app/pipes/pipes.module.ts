@@ -5,6 +5,7 @@ import { SortOfCategoryPipe } from './sort-of-category.pipe';
 import { SortOfOrder } from './sort-of-order.pipe';
 import { SortOfCategoryProductCollectionPipe } from './sort-of-category-product-collection.pipe';
 import { SortOfMeasureProductCollectionPipe } from './sort-of-measure-product-collection.pipe';
+import { SortOfPricePipe } from './sort-of-price.pipe';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { SortOfMeasureProductCollectionPipe } from './sort-of-measure-product-co
     SortOfOrder,
     SortOfCategoryProductCollectionPipe,
     SortOfMeasureProductCollectionPipe,
+    SortOfPricePipe,
   ],
   imports: [CommonModule],
   exports: [
@@ -20,7 +22,8 @@ import { SortOfMeasureProductCollectionPipe } from './sort-of-measure-product-co
     SortOfCategoryPipe,
     SortOfOrder,
     SortOfCategoryProductCollectionPipe,
-    SortOfMeasureProductCollectionPipe
+    SortOfMeasureProductCollectionPipe,
+    SortOfPricePipe
   ],
 })
 export class PipesModule {}

@@ -24,6 +24,7 @@ a {
   }
 }
 .btn-group {
+
   position: absolute;
   display: flex;
   align-items: center;
@@ -31,6 +32,8 @@ a {
   gap: 5px;
   width: 100%;
   bottom: 10px;
+
+
   button {
     background: #fff;
     border-radius: 100%;
