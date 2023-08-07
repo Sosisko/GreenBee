@@ -2,26 +2,35 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.6.
 
-## Development server
+## Администратирование
+Для перехода в админку необходимо перейти по адресу http://localhost:4200/admin
+Email: a@a.ru
+Password: 123456
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+Использована база данных FireBase от Google.
+База данных в открытом доступе.
+Возможность добавлять, удалять и редактировать товары.
 
-## Code scaffolding
+Для добавления картинки использована библиотека ngx-quill.
+Картинка кодируется в формат base64.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Опционально можно добавлять опции товара, такие как вес и литры.
 
-## Build
+Также есть возможность установить скидку на товар.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Клиентская часть
+Для поиска и сортировки товаров использованы pipes.
 
-## Running unit tests
+Если у товара есть опции, то вместо кнопки "Добавить в корзину" появляется кнопка "Выбрать опции".
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Модальные окна выполнены с помощью Angular Material.
 
-## Running end-to-end tests
+Для анимации иконок быстрого просмотра товара использован Angular Animations.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Товары попавшие в корзину сохраняются в Local Storage.
 
-## Further help
+Для алертов при добавлении, редактировании, удалении товара создан отбельный сервис и соответстующий переиспользуемый компонент.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+(Функция добавления товара в избранное не реализована)
+
+
