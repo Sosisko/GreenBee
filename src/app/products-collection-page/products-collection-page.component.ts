@@ -10,8 +10,8 @@ export class ProductsCollectionPageComponent {
   products$!: any;
   selectedOption: string = 'default';
   sortingColumn!: string;
-  @Output() boxView = true;
-  @Output() fullView = false;
+  @Output() boxView = false;
+  @Output() fullView = true;
 
   products: any;
 

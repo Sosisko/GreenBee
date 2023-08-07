@@ -24,7 +24,6 @@ a {
   }
 }
 .btn-group {
-
   position: absolute;
   display: flex;
   align-items: center;
@@ -32,7 +31,6 @@ a {
   gap: 5px;
   width: 100%;
   bottom: 10px;
-
 
   button {
     background: #fff;
@@ -54,7 +52,36 @@ a {
       transition: all 0.3s linear;
     }
   }
+}
 
+.btn-group-full-view {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  .btn-group-param {
+    button {
+      margin-right: 10px;
+      background: #fff;
+      border-radius: 100%;
+      box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.15);
+      border: none;
+      font-size: 0;
+      width: 40px;
+      height: 40px;
+      color: #bdbdbd;
+      cursor: pointer;
+      transition: all 0.3s linear;
+      mat-icon {
+        transform: scale(0.7);
+      }
+      &:hover {
+        color: #fff;
+        background-color: #78b144;
+        transition: all 0.3s linear;
+      }
+    }
+  }
 }
 
 .right-side-content {
@@ -119,7 +146,7 @@ a {
   cursor: pointer;
   width: 100%;
   &.active {
-    min-width:230px;
+    min-width: 230px;
     max-width: 230px;
   }
 }

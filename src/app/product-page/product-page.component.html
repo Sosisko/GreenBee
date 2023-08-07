@@ -14,7 +14,7 @@
       styles="padding: 0"
     ></quill-view-html
   ></a>
-  <div class="btn-group">
+  <div *ngIf="!fullView" class="btn-group">
     <button [@btnOne]="btnState" (click)="openDialog(product)">
       <mat-icon>search</mat-icon>
     </button>
@@ -33,25 +33,35 @@
     </div>
   </div>
 
-  <div class="description" *ngIf="fullView">{{product.description}}</div>
+  <div class="description" *ngIf="fullView">{{ product.description }}</div>
 
-  <div *ngIf="product.options; else whithoutOptions">
-    <button class="btn-add-cart" [ngClass]="fullView ? 'active' : ''" (click)="openDialog(product)">
-      <mat-icon fontIcon="done"></mat-icon>
-      <span>Выбрать опции</span>
-    </button>
-  </div>
-  <ng-template #whithoutOptions>
-    <button class="btn-add-cart" [ngClass]="fullView ? 'active' : ''" (click)="onAddToCart(product)">
-      <mat-icon fontIcon="local_mall"></mat-icon>
-      <span>Добавить в корзину</span>
-    </button>
-  </ng-template>
+  <div class="btn-group-full-view">
+    <div *ngIf="product.options; else whithoutOptions">
+      <button
+        class="btn-add-cart"
+        [ngClass]="fullView ? 'active' : ''"
+        (click)="openDialog(product)"
+      >
+        <mat-icon fontIcon="done"></mat-icon>
+        <span>Выбрать опции</span>
+      </button>
+    </div>
 
-  <div *ngIf="fullView" class="btn-group">
-    <button [@btnOne]="btnState" (click)="openDialog(product)">
-      <mat-icon>search</mat-icon>
-    </button>
-    <button [@btnTwo]="btnState"><mat-icon>favorite_border</mat-icon></button>
+    <ng-template #whithoutOptions>
+      <button
+        class="btn-add-cart"
+        [ngClass]="fullView ? 'active' : ''"
+        (click)="onAddToCart(product)"
+      >
+        <mat-icon fontIcon="local_mall"></mat-icon>
+        <span>Добавить в корзину</span>
+      </button>
+    </ng-template>
+    <div *ngIf="fullView" class="btn-group-param">
+      <button (click)="openDialog(product)">
+        <mat-icon>search</mat-icon>
+      </button>
+      <button><mat-icon>favorite_border</mat-icon></button>
+    </div>
   </div>
 </div>
