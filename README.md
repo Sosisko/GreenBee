@@ -9,6 +9,9 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 4. Запустить проект командой npm start
 
 ## Администратирование
+ВНИМАНИЕ!
+Редактирование/удаление/добавление товаров происходит в реальной базе данных!
+
 Для перехода в админку необходимо перейти по адресу http://localhost:4200/admin
 Email: a@a.ru
 Password: 123456
