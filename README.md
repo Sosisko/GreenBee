@@ -2,7 +2,16 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.6.
 
+## Порядок установки и запуска
+1. Склонировать рпозиторий командой в терминале git clone https://github.com/Sosisko/GreenBee.git
+2. Перейти в терминале в папку GreenBee
+3. Установить зависимости командой npm i
+4. Запустить проект командой npm start
+
 ## Администратирование
+ВНИМАНИЕ!
+Редактирование/удаление/добавление товаров происходит в реальной базе данных!
+
 Для перехода в админку необходимо перейти по адресу http://localhost:4200/admin
 Email: a@a.ru
 Password: 123456
