@@ -1,7 +1,6 @@
-
 <div *ngIf="product">
-    <div class="product">
-          <button mat-dialog-close class="btn-back">x</button>
+  <div class="product">
+    <button mat-dialog-close class="btn-back">x</button>
     <div class="container">
       <div class="content-wrapper">
         <div *ngIf="discountProcent" class="bage">
@@ -13,27 +12,39 @@
             styles="padding: 0"
           ></quill-view-html>
         </div>
-  
+
         <div class="content">
           <div class="title">
             <h2>{{ product.title }}</h2>
           </div>
           <div class="categories">
             <span>Категория:</span>
-            <small>{{ product.category }}</small>
+            <small>{{
+              product.category === "Fruits"
+                ? "Фрукты"
+                : product.category === "Vegetable"
+                ? "Овощи"
+                : product.category === "Juices"
+                ? "Соки"
+                : ""
+            }}</small>
           </div>
           <div class="description">
             <p>{{ product.description }}</p>
           </div>
           <div class="price">
-            <span *ngIf="measurePrice; else productPrice">{{ measurePrice | currency }}</span>
-            <ng-template #productPrice> <span>{{ product.price | currency }}</span></ng-template>
-            <span class="regular-price">{{regularPrice | currency }}</span>
+            <span *ngIf="measurePrice; else productPrice">{{
+              measurePrice | currency
+            }}</span>
+            <ng-template #productPrice>
+              <span>{{ product.price | currency }}</span></ng-template
+            >
+            <span class="regular-price">{{ regularPrice | currency }}</span>
           </div>
-  
+
           <div *ngIf="product.options; else nonOption">ЕСТЬ ОПЦИИ!</div>
           <ng-template #nonOption>НЕТ ОПЦИЙ!</ng-template>
-  
+
           <ul class="option-wrapper">
             <li *ngFor="let option of product.options">
               <div class="input-options">
@@ -44,10 +55,13 @@
                   (change)="onChange(option)"
                 />
               </div>
-              <p class="option-quantity">{{option.measureQantity}}<span>{{option.measureValue}}</span></p>
+              <p class="option-quantity">
+                {{ option.measureQantity
+                }}<span>{{ option.measureValue }}</span>
+              </p>
             </li>
           </ul>
-  
+
           <div class="product-add-to-cart">
             <div class="product-quantity">
               <div class="input-group">
@@ -70,7 +84,7 @@
                 </button>
               </div>
             </div>
-  
+
             <div>
               <button class="btn-add-to-cart" (click)="addProduct(product)">
                 Добавить в корзину
@@ -81,4 +95,4 @@
       </div>
     </div>
   </div>
-  
+</div>

@@ -1,8 +1,5 @@
-<h1>Discover Our Products</h1>
-<p>
-  At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis
-  praesentium.
-</p>
+<h1>Откройте для себя наши продукты</h1>
+<p>Только свежие и натуральные продукты !</p>
 <div class="container">
   <ul class="category-list">
     <li [class.active]="!category || category == 'All'">
@@ -10,7 +7,7 @@
         <div class="img-cate">
           <img src="../../assets/images/icons/all.jpeg" alt="all" />
         </div>
-        <div class="title-cate">All</div>
+        <div class="title-cate">Все продукты</div>
       </a>
     </li>
     <li [class.active]="category == 'Fruits'">
@@ -18,14 +15,15 @@
         ><div class="img-cate">
           <img src="../../assets/images/icons/fru.jpg" alt="Fruits" />
         </div>
-        <div class="title-cate">Fruits</div></a>
+        <div class="title-cate">Фрукты</div></a
+      >
     </li>
     <li [class.active]="category == 'Vegetable'">
       <a (click)="setCat('Vegetable')"
         ><div class="img-cate">
           <img src="../../assets/images/icons/veg.jpg" alt="Vegetable" />
         </div>
-        <div class="title-cate">Vegetable</div></a
+        <div class="title-cate">Овощи</div></a
       >
     </li>
     <li [class.active]="category == 'Juices'">
@@ -33,7 +31,7 @@
         ><div class="img-cate">
           <img src="../../assets/images/icons/jus.jpg" alt="Juices" />
         </div>
-        <div class="title-cate">Juices</div></a
+        <div class="title-cate">Соки</div></a
       >
     </li>
   </ul>
@@ -60,9 +58,8 @@
           | paginate : { itemsPerPage: 8, currentPage: p }
       "
       [product]="product"
-
     >
-     </app-product-page>
+    </app-product-page>
   </div>
   <pagination-controls
     *ngIf="products$ | async as products"

@@ -14,27 +14,27 @@
       <div class="left-side-info">
         <h3>{{ data.product.title }}</h3>
         <b>{{ data.product.price | currency }}</b>
-        <span>Quantity:{{ data.product.quantity }}</span>
+        <span>Количество:{{ data.product.quantity }}</span>
       </div>
     </div>
     <div class="right-side">
       <p>
-        There are
+        У вас сейчас
         <span class="total-quantity">{{ data.totalQuantity$ | async }}</span>
-        items in your cart.
+        товаров в корзине.
       </p>
       <p class="total-price-products">
-        Total products: <b>{{ data.totalPrice$ | async | currency }}</b>
+        Всего продуктов на сумму:
+        <b>{{ data.totalPrice$ | async | currency }}</b>
       </p>
-      <p class="total-shipping">Total shipping: Free</p>
+      <p class="total-shipping">Доставка: БЕСПЛАТНО</p>
       <p class="total-price">
-        Total: <b>{{ data.totalPrice$ | async | currency }}</b> (tax incl.)
+        Итого: <b>{{ data.totalPrice$ | async | currency }}</b> (включая
+        налоги.)
       </p>
     </div>
   </div>
   <div class="btn-wrap">
-    <button mat-dialog-close class="btn-to-shop">
-      Вернуться к покупкам
-    </button>
+    <button mat-dialog-close class="btn-to-shop">Вернуться к покупкам</button>
   </div>
 </div>

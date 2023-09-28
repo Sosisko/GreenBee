@@ -2,7 +2,7 @@
   <div class="product">
     <div class="breadcrumb">
       <div class="container">
-        <button class="btn-back" routerLink="/">Back</button>
+        <button class="btn-back" routerLink="/">Назад</button>
       </div>
     </div>
   </div>
@@ -11,7 +11,7 @@
       <div *ngIf="discountProcent" class="bage">
         <span>-{{ discountProcent }}%</span>
       </div>
-      
+
       <div class="image">
         <quill-view-html
           [content]="product.image"
@@ -25,15 +25,27 @@
         </div>
         <div class="categories">
           <span>Категория:</span>
-          <small>{{ product.category }}</small>
+          <small>{{
+            product.category === "Fruits"
+              ? "Фрукты"
+              : product.category === "Vegetable"
+              ? "Овощи"
+              : product.category === "Juices"
+              ? "Соки"
+              : ""
+          }}</small>
         </div>
         <div class="description">
           <p>{{ product.description }}</p>
         </div>
         <div class="price">
-          <span *ngIf="measurePrice; else productPrice">{{ measurePrice | currency }}</span>
-          <ng-template #productPrice> <span>{{ product.price | currency }}</span></ng-template>
-          <span class="regular-price">{{regularPrice | currency }}</span>
+          <span *ngIf="measurePrice; else productPrice">{{
+            measurePrice | currency
+          }}</span>
+          <ng-template #productPrice>
+            <span>{{ product.price | currency }}</span></ng-template
+          >
+          <span class="regular-price">{{ regularPrice | currency }}</span>
         </div>
 
         <div *ngIf="product.options; else nonOption">ЕСТЬ ОПЦИИ!</div>
@@ -49,7 +61,9 @@
                 (change)="onChange(option, product)"
               />
             </div>
-            <p class="option-quantity">{{option.measureQantity}}<span>{{option.measureValue}}</span></p>
+            <p class="option-quantity">
+              {{ option.measureQantity }}<span>{{ option.measureValue }}</span>
+            </p>
           </li>
         </ul>
 

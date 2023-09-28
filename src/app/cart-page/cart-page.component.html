@@ -34,16 +34,21 @@
         ></mat-grid-tile>
 
         <div class="product-title">
-          <mat-grid-tile colspan="1"
-            >{{ product.title }}
-            </mat-grid-tile
-          >
+          <mat-grid-tile colspan="1">{{ product.title }} </mat-grid-tile>
         </div>
 
         <mat-grid-tile colspan="2"
-          ><b> {{ product.price | currency }}<span class="product-measure-qantity"
-            >{{ product.options ? "(" +product.options.measureQantity+product.options.measureValue + ")" : null}}</span
-          ></b></mat-grid-tile
+          ><b>
+            {{ product.price | currency
+            }}<span class="product-measure-qantity">{{
+              product.options
+                ? "(" +
+                  product.options.measureQantity +
+                  product.options.measureValue +
+                  ")"
+                : null
+            }}</span></b
+          ></mat-grid-tile
         >
         <mat-grid-tile colspan="2" class="quantity">
           <div class="input-group">
@@ -87,20 +92,20 @@
       </div>
       <div class="group-price">
         <div class="cart-total-product-price">
-          Total products:
+          Сумма всех продуктов:
           <span>{{ totalPrice | currency }}</span>
         </div>
         <div class="cart-total--shipping">
-          Total Shipping:
-          <span>Free</span>
+          Сумма доставки:
+          <span>БЕСПЛАТНО</span>
         </div>
       </div>
 
       <div class="cart-total-price">
-        Total
+        Общая стоимость
         <span>{{ totalPrice | currency }}</span>
       </div>
-      <button class="btn-checkout">Checkout</button>
+      <button class="btn-checkout">Перейти к оплате</button>
     </div>
   </div>
 </div>
